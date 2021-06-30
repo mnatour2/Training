@@ -3,29 +3,37 @@
 
 <head>
     <link rel="stylesheet" href="styleSheet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <title>Login</title>
 </head>
 
 <body>
-    <header id="header1">
+    <!-- <header id="header1">
         <nav id="topnav">
             <a class="topnav-item" href="#">Sign Up</a>
             <a class="active topnav-item" href="#">Login</a>
             <a class="topnav-item" href="#">Home</a>
         </nav>
-    </header>
+    </header> -->
     <div id="content">
         <form action="Get">
-            <h1>Login</h1>
-            <div>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username">
+            <h4>Login</h4>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" value="Enter username">
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password" value="Enter password">
+            <div id="remember_forgot">
+                <label id="switch">
+                    <input type="checkbox"> Remember me
+                </label>
+                <a href="#">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" class="svg-inline--fa fa-lock fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"></path></svg>
+                    Forgot password?</a>
             </div>
-            <div>
-                <label for="password">Password</label>
-                <input type="text" id="password" name="password">
-            </div>
-            <button>Login</button>
         </form>
     </div>
 
