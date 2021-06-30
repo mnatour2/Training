@@ -76,3 +76,7 @@ button{
     color: white;
     background-color: black;
 }
+
+div{
+  margin: 5px;
+}
