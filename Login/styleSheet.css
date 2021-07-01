@@ -75,6 +75,10 @@ label{
   font-weight: bold;
 }
 
+button {
+  cursor: pointer;
+}
+
 h4 {
   margin: 0px;
   padding-bottom: 18px;
