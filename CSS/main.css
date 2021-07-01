@@ -69,7 +69,7 @@ input {
   width: 300px;
   padding: 10px;
 }
-label{
+label {
   margin-bottom: 10px;
   font-size: small;
   font-weight: bold;
@@ -87,16 +87,27 @@ h4 {
   font-weight: bold;
 }
 
+#switch {
+  display: block;
+  position: relative;
+}
+
 #switch input {
   width: max-content;
+  position: relative;
+  bottom: -2px;
 }
 
 a {
   text-decoration: none;
+  padding-left: 8px;
+  color: blue;
 }
 
 .fa-lock {
   width: 12px;
+  position: relative;
+  bottom: -2px;
 }
 
 .fa-sign-in-alt {
@@ -104,7 +115,8 @@ a {
   color: white;
 }
 
-#loginBtn {
+#loginBtn,
+#registerBtn {
   color: white;
   background-color: rgb(120, 120, 253);
   border-radius: 7px;
@@ -112,22 +124,30 @@ a {
   border: none;
 }
 
-#loginBtn * {
+#loginBtn *,
+#registerBtn * {
   vertical-align: middle;
   color: white;
 }
 
-#loginBtn span {
+#loginBtn span,
+#registerBtn span {
   padding-right: 8px;
 }
 
-#remember_forgot {
+#remember_forgot,
+#agreeTerms {
   display: flex;
   justify-content: space-between;
   font-size: small;
 }
 
-#register {
+#remember_forgot a {
+  color: grey;
+}
+
+#register,
+#login {
   font-size: small;
   display: flex;
   justify-content: center;
@@ -187,6 +207,6 @@ a {
   font-weight: bold;
 }
 
-#fbBtn{
+#fbBtn {
   border-right: inherit;
 }
