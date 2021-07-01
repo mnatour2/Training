@@ -7,10 +7,10 @@ body {
   height: 100%;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   color: grey;
 }
 
@@ -69,34 +69,120 @@ input {
   width: 300px;
   padding: 10px;
 }
-
-button {
+label{
   margin-bottom: 10px;
-  border-radius: 10%;
-  border: 2px solid black;
-  color: white;
-  background-color: black;
+  font-size: small;
+  font-weight: bold;
 }
 
-h4{
+h4 {
   margin: 0px;
-  padding-bottom: 16px;
+  padding-bottom: 18px;
+  color: black;
+  font-size: large;
+  font-weight: bold;
 }
 
-#switch input{
+#switch input {
   width: max-content;
 }
 
 a {
   text-decoration: none;
-  
 }
 
 .fa-lock {
   width: 12px;
 }
 
-#remember_forgot{
+.fa-sign-in-alt {
+  width: 12px;
+  color: white;
+}
+
+#loginBtn {
+  color: white;
+  background-color: rgb(120, 120, 253);
+  border-radius: 7px;
+  height: 30px;
+  border: none;
+}
+
+#loginBtn * {
+  vertical-align: middle;
+  color: white;
+}
+
+#loginBtn span {
+  padding-right: 8px;
+}
+
+#remember_forgot {
   display: flex;
   justify-content: space-between;
+  font-size: small;
+}
+
+#register {
+  font-size: small;
+  display: flex;
+  justify-content: center;
+  margin: 18px;
+}
+
+#register a {
+  padding-left: 8px;
+  color: blue;
+}
+
+#loginWith {
+  position: relative;
+  text-align: center;
+}
+
+#loginWithText {
+  background-color: #fff;
+  padding: 0 3px;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  width: fit-content;
+  height: fit-content;
+}
+#loginWith:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  border-top: 1px dashed rgb(194, 193, 193);
+  width: 34%;
+}
+#loginWith:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  border-top: 1px dashed rgb(194, 193, 193);
+  width: 34%;
+}
+
+#facebooktwitter {
+  display: flex;
+  background-color: white;
+  border: 2px solid rgb(136, 136, 255);
+  border-radius: 5px;
+  margin-top: 18px;
+}
+
+#facebooktwitter * {
+  border: none;
+  height: 30px;
+  width: 50%;
+  color: rgb(136, 136, 255);
+  background-color: white;
+  font-weight: bold;
+}
+
+#fbBtn{
+  border-right: inherit;
 }

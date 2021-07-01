@@ -23,16 +23,40 @@
         <form action="Get">
             <h4>Login</h4>
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" value="Enter username">
+            <input type="text" id="username" name="username" placeholder="Enter username">
             <label for="password">Password</label>
-            <input type="text" id="password" name="password" value="Enter password">
+            <input type="text" id="password" name="password" placeholder="Enter password">
             <div id="remember_forgot">
                 <label id="switch">
                     <input type="checkbox"> Remember me
                 </label>
                 <a href="#">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" class="svg-inline--fa fa-lock fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"></path></svg>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock"
+                        class="svg-inline--fa fa-lock fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512">
+                        <path fill="currentColor"
+                            d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z">
+                        </path>
+                    </svg>
                     Forgot password?</a>
+            </div>
+            <button id="loginBtn"><span> Log In </span><svg aria-hidden="true" focusable="false" data-prefix="fas"
+                    data-icon="sign-in-alt" class="svg-inline--fa fa-sign-in-alt fa-w-16" role="img"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path fill="white"
+                        d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z">
+                    </path>
+                </svg>
+            </button>
+            <div id="register">
+                Don't have an account ? <a href="#">Free Register</a>
+            </div>
+            <div id="loginWith">
+                <span id="loginWithText"> Or Login With </span>
+            </div>
+            <div id="facebooktwitter">
+                <button id="fbBtn">Facebook</button>
+                <button id="twBtn">Twitter</button>
             </div>
         </form>
     </div>
