@@ -226,24 +226,21 @@ a {
   border-right: inherit;
 }
 
-.password-container {
+.validation-form {
   margin-bottom: 2em;
   display: flex;
   flex-direction: column;
 }
 
-.password-container #message {
+.validation-form .message {
   display: none;
   color: #000;
   margin-top: 0px;
   font-size: 10px;
+  color: red;
+  font-weight: bolder;
 }
 
-.password-container input {
+.validation-form input{
   margin-bottom: 0px;
-}
-
-#password:focus {
-  border-style: none;
-  border-color: red;
 }

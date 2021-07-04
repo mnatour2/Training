@@ -1,32 +1,43 @@
-var myInput = document.getElementById("password");
-var passw = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-const passwordMessage = document.querySelector('#message');
+var passw = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/; //password regex check if have at least one lower case, one upper case, one digit and at least 8 length.
+var usern = /(?=.*[A-Za-z0-9_]).{10,30}/; //username regex check if contains only letters and numbers and underscore 
+//TODO REGEX IS WRONG FIX IT
+var usernameInput = document.getElementById("username");
+var passwordInput = document.getElementById("password");
+var confirmPasswordInput = document.getElementById("confirmPassword");
+const usernameMessage = document.querySelector("#usernameMessage");
+const passwordMessage = document.querySelector("#passwordMessage");
+const confirmPasswordMessage = document.querySelector(
+  "#confirmPasswordMessage"
+);
 
-// When the user clicks on the password field, show the message box
-myInput.onfocus = function () {
-  document.getElementById("message").style.display = "block";
-};
-
-// When the user clicks outside of the password field, hide the message box
-myInput.onblur = function () {
-  document.getElementById("message").style.display = "none";
-};
-
-// When the user starts to type something inside the password field
-myInput.onkeyup = function () {
-  document.getElementById("message").style.display = "block";
-};
-
-function CheckPassword() {
-  if (this.value.match(passw)) {
-    document.getElementById("message").setAttribute;
-    passwordMessage.style.color = 'green';
-    // myInput.style.borderColor = 'green';
-    return true;
+function CheckUsername() {
+  if (this.value.match(usern)) {
+    usernameMessage.style.display = "none";
   } else {
-    passwordMessage.style.color = 'red';
-    // myInput.style.borderColor = 'red';
-    return false;
+    usernameMessage.style.display = "block";
   }
 }
-myInput.oninput = CheckPassword;
+
+usernameInput.oninput = CheckUsername;
+
+//check if the input checks with the regex.
+function CheckPassword() {
+  if (this.value.match(passw)) {
+    document.getElementById("passwordMessage").style.display = "none";
+  } else {
+    document.getElementById("passwordMessage").style.display = "block";
+  }
+}
+
+passwordInput.oninput = CheckPassword;
+
+//check if the input checks with the first password input.
+function CheckConfirmPassword() {
+  if (this.value == passwordInput.value) {
+    document.getElementById("confirmPasswordMessage").style.display = "none";
+  } else {
+    document.getElementById("confirmPasswordMessage").style.display = "block";
+  }
+}
+
+confirmPasswordInput.oninput = CheckConfirmPassword;
