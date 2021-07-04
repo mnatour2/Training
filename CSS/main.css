@@ -107,7 +107,7 @@ a {
   color: blue;
 }
 
-#forgot{
+#forgot {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,6 +122,11 @@ a {
 .fa-sign-in-alt {
   width: 12px;
   color: white;
+}
+
+.fa-times-circle {
+  width: 12px;
+  color: red;
 }
 
 #loginBtn,
@@ -219,4 +224,26 @@ a {
 
 #fbBtn {
   border-right: inherit;
+}
+
+.password-container {
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.password-container #message {
+  display: none;
+  color: #000;
+  margin-top: 0px;
+  font-size: 10px;
+}
+
+.password-container input {
+  margin-bottom: 0px;
+}
+
+#password:focus {
+  border-style: none;
+  border-color: red;
 }
