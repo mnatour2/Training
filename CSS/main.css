@@ -235,7 +235,7 @@ a {
 .validation-form .message {
   display: none;
   color: #000;
-  margin-top: 0px;
+  margin-top: 2px;
   font-size: 10px;
   color: red;
   font-weight: bolder;

@@ -23,8 +23,13 @@
                     <br>and between 10-30 characters.
                 </p>
             </div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter Email">
+            <div class="validation-form">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter Email">
+                <p class="message" id="emailMessage">Email must contain letters, dots
+                    <br>and ends with @vatrin.com
+                </p>
+            </div>
             <div class="validation-form">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter password">
@@ -38,8 +43,11 @@
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Enter Confirm Password">
                 <p class="message" id="confirmPasswordMessage">Passwords don't match.</p>
             </div>
-            <label for="mobileNumber">Mobile Number</label>
-            <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Enter Mobile Number">
+            <div class="validation-form">
+                <label for="mobileNumber">Mobile Number</label>
+                <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Enter Mobile Number">
+                <p class="message" id="mobileMessage">Mobile must start with 05 and 8 numbers after it.</p>
+            </div>
             <div id="agreeTerms">
                 <label id="switch">
                     <input type="checkbox"> By registering you agree to the Metrica <a href="#">Terms of Use</a>
