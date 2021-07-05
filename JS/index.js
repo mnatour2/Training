@@ -31,8 +31,6 @@ function CheckUsername() {
   }
 }
 
-usernameInput.oninput = CheckUsername;
-
 //check if the input checks with the regex.
 function CheckEmail() {
   if (this.value.match(emailRegex)) {
@@ -41,8 +39,6 @@ function CheckEmail() {
     emailMessage.style.display = "block";
   }
 }
-
-emailInput.oninput = CheckEmail;
 
 //check if the input checks with the regex.
 function CheckPassword() {
@@ -53,8 +49,6 @@ function CheckPassword() {
   }
 }
 
-passwordInput.oninput = CheckPassword;
-
 //check if the input checks with the first password input.
 function CheckConfirmPassword() {
   if (this.value == passwordInput.value) {
@@ -63,8 +57,6 @@ function CheckConfirmPassword() {
     confirmPasswordMessage.style.display = "block";
   }
 }
-
-confirmPasswordInput.oninput = CheckConfirmPassword;
 
 //check if the input checks with the regex.
 function CheckMobile() {
@@ -75,4 +67,11 @@ function CheckMobile() {
   }
 }
 
-mobileInput.oninput = CheckMobile;
+usernameInput.oninput = CheckUsername;
+passwordInput.oninput = CheckPassword;
+
+if (emailInput) {
+  emailInput.oninput = CheckEmail;
+  confirmPasswordInput.oninput = CheckConfirmPassword;
+  mobileInput.oninput = CheckMobile;
+}

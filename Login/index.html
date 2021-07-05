@@ -22,10 +22,16 @@
     <div id="content">
         <form action="Get">
             <h4>Login</h4>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter username">
-            <label for="password">Password</label>
-            <input type="text" id="password" name="password" placeholder="Enter password">
+            <div class="validation-form">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter username">
+                <p class="message" id="usernameMessage">Wrong Username</p>
+            </div>
+            <div class="validation-form">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password">
+                <p class="message" id="passwordMessage">Wrong Password</p>
+            </div>
             <div id="remember_forgot">
                 <label id="switch">
                     <input type="checkbox"> Remember me
@@ -49,7 +55,7 @@
                 </svg>
             </button>
             <div id="register">
-                Don't have an account ? <a href="#">Free Register</a>
+                Don't have an account ? <a href="../Register/index.html">Free Register</a>
             </div>
             <div id="loginWith">
                 <span id="loginWithText"> Or Login With </span>
@@ -60,7 +66,7 @@
             </div>
         </form>
     </div>
-
+    <script src="../JS/index.js"></script>
 </body>
 
 </html>
