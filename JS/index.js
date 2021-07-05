@@ -75,3 +75,14 @@ if (emailInput) {
   confirmPasswordInput.oninput = CheckConfirmPassword;
   mobileInput.oninput = CheckMobile;
 }
+
+function myValidation()
+{
+   if(usernameInput)
+   {
+      alert("Oops! Validation failed!");
+      return false;
+   }
+   alert("Validations successful!");
+   return true;
+}

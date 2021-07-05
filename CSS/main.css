@@ -53,6 +53,7 @@ body {
 
 form {
   display: flex;
+  position: fixed;
   width: fit-content;
   height: fit-content;
   background: white;
@@ -227,7 +228,7 @@ a {
 }
 
 .validation-form {
-  margin-bottom: 2em;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
 }
