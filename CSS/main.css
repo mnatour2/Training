@@ -53,6 +53,7 @@ body {
 
 form {
   display: flex;
+  position: fixed;
   width: fit-content;
   height: fit-content;
   background: white;
@@ -107,7 +108,7 @@ a {
   color: blue;
 }
 
-#forgot{
+#forgot {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,6 +123,11 @@ a {
 .fa-sign-in-alt {
   width: 12px;
   color: white;
+}
+
+.fa-times-circle {
+  width: 12px;
+  color: red;
 }
 
 #loginBtn,
@@ -219,4 +225,23 @@ a {
 
 #fbBtn {
   border-right: inherit;
+}
+
+.validation-form {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.validation-form .message {
+  display: none;
+  color: #000;
+  margin-top: 2px;
+  font-size: 10px;
+  color: red;
+  font-weight: bolder;
+}
+
+.validation-form input{
+  margin-bottom: 0px;
 }

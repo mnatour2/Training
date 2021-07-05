@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="../CSS/main.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
@@ -13,18 +14,40 @@
 
 <body>
     <div id="content">
-        <form action="Get">
+        <form>
             <h4>Register</h4>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter username">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter Email">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter password">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Enter Confirm Password">
-            <label for="mobileNumber">Mobile Number</label>
-            <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Enter Mobile Number">
+            <div class="validation-form">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter username">
+                <p class="message" id="usernameMessage">Username must contain numbers, letters, underscore
+                    <br>and between 10-30 characters.
+                </p>
+            </div>
+            <div class="validation-form">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter Email">
+                <p class="message" id="emailMessage">Email must contain letters, dots
+                    <br>and ends with @vatrin.com
+                </p>
+            </div>
+            <div class="validation-form">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password">
+                <p class="message" id="passwordMessage">Password must contain the following: A lowercase letter
+                    ,<br>A capital (uppercase) letter, A number,
+                    Minimum 8
+                    characters.</p>
+            </div>
+            <div class="validation-form">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Enter Confirm Password">
+                <p class="message" id="confirmPasswordMessage">Passwords don't match.</p>
+            </div>
+            <div class="validation-form">
+                <label for="mobileNumber">Mobile Number</label>
+                <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Enter Mobile Number">
+                <p class="message" id="mobileMessage">Mobile must start with 05 and 8 numbers after it.</p>
+            </div>
             <div id="agreeTerms">
                 <label id="switch">
                     <input type="checkbox"> By registering you agree to the Metrica <a href="#">Terms of Use</a>
@@ -34,11 +57,13 @@
                 <span> Register </span>
             </button>
             <div id="login">
-                Already have an account ? <a href="#">Log in</a>
+                Already have an account ? <a href="../Login/index.html">Log in</a>
             </div>
         </form>
+
     </div>
 
+    <script src="../JS/index.js"></script>
 </body>
 
 </html>
