@@ -22,6 +22,7 @@
                     id="inputGroup-sizing-default">Username</label>
                 <input type="text" class="form-control" aria-label="inputGroupPrepend" id="validationTooltipUsername"
                     aria-describedby="inputGroup-sizing-default">
+                <small class="w-100 text-start text-danger d-none" id="usernameErrorMessage">Username must contain numbers, letters, underscore and between 10-30 characters.</small>
             </div>
 
             <div class="input-group col-md-12">
@@ -29,23 +30,27 @@
                 <input type="text" class="form-control" id="validationTooltip01" aria-label="inputGroupPrepend"
                     aria-describedby="inputGroup-sizing-default" required>
                 <span class="input-group-text bg-light" id="basic-addon2">@vatrin.com</span>
+                <small class="w-100 text-start text-danger d-none" id="emailErrorMessage">Email must contain letters, dots and ends with @vatrin.com</small>
             </div>
 
             <div class="input-group col-md-12">
                 <label for="validationTooltip02" class="input-group-text">Password</label>
                 <input type="password" class="form-control m-0" id="validationTooltip02" aria-label="inputGroupPrepend"
                     aria-describedby="inputGroup-sizing-default" required>
+                <small class="w-100 text-start text-danger d-none" id="passwordErrorMessage">Password must contain the following: A lowercase letter, A capital (uppercase) letter, A number, Minimum 8 characters.</small>
             </div>
             <div class="input-group col-md-12">
                 <label for="validationTooltip03" class="input-group-text">Confirm Password</label>
                 <input type="password" class="form-control m-0" id="validationTooltip03" aria-label="inputGroupPrepend"
                     aria-describedby="inputGroup-sizing-default" required>
+                <small class="w-100 text-start text-danger d-none" id="confrimPasswordErrorMessage">Passwords don't match.</small>
             </div>
             <div class="input-group col-md-12">
-                <label for="validationTooltip04" class="input-group-text">Mobile Number</label>
-                <span class="input-group-text bg-light" id="inputGroupPrepend">05</span>
-                <input type="tel" class="form-control" id="validationTooltip04" aria-describedby="inputGroupPrepend"
-                    required>
+                    <label for="validationTooltip04" class="input-group-text">Mobile Number</label>
+                    <span class="input-group-text bg-light" id="inputGroupPrepend">05</span>
+                    <input type="tel" class="form-control" id="validationTooltip04" aria-describedby="inputGroupPrepend"
+                        required>
+                    <small class="w-100 text-start text-danger d-none" id="mobileErrorMessage">Mobile must start with 05 and 8 numbers after it.</small>
             </div>
             <div class="col-12">
                 <button class="btn btn-primary" type="submit">Submit form</button>
