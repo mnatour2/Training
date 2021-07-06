@@ -12,74 +12,63 @@ const registerForm = document.querySelector("form#register-form");
 const loginForm = document.querySelector("form#login-form");
 
 if (registerForm) {
-  var usernameInput = document.getElementById("validationTooltipUsername");
-  var emailInput = document.getElementById("validationTooltip01");
-  var passwordInput = document.getElementById("validationTooltip02");
-  var confirmPasswordInput = document.getElementById("validationTooltip03");
-  var mobileInput = document.getElementById("validationTooltip04");
-
-  const usernameMessage = document.querySelector("#usernameErrorMessage");
-  const emailMessage = document.querySelector("#emailErrorMessage");
-  const passwordMessage = document.querySelector("#passwordErrorMessage");
-  const confirmPasswordMessage = document.querySelector(
-    "#confrimPasswordErrorMessage"
-  );
-  const mobileMessage = document.querySelector("#mobileErrorMessage");
-
   registerForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    validateField(usernameInput, usernameRegex, usernameMessage);
-    validateField(emailInput, emailRegex, emailMessage);
+    validateField(
+      "validationTooltipUsername",
+      usernameRegex,
+      "usernameErrorMessage"
+    );
+    validateField("validationTooltip01", emailRegex, "emailErrorMessage");
     const isPasswordValid = validateField(
-      passwordInput,
+      "validationTooltip02",
       passwordRegex,
-      passwordMessage
+      "passwordErrorMessage"
     );
     if (isPasswordValid)
       checkConfirmPassword(
-        passwordInput,
-        confirmPasswordInput,
-        confirmPasswordMessage
+        "validationTooltip02",
+        "validationTooltip03",
+        "confrimPasswordErrorMessage"
       );
-    validateField(mobileInput, mobileRegex, mobileMessage);
+    validateField("validationTooltip04", mobileRegex, "mobileErrorMessage");
   });
 }
 
 if (loginForm) {
-  var usernameInput = document.getElementById("floatingInput");
-  var emailInput = document.getElementById("floatingPassword");
-
-  const message = document.querySelector("#usernamePasswordWrong");
-
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    validateField(floatingInput, usernameRegex, message);
-    validateField(floatingPassword, passwordRegex, message);
+    validateField("floatingInput", usernameRegex, "usernamePasswordWrong");
+    validateField("floatingPassword", passwordRegex, "usernamePasswordWrong");
   });
 }
 
 function checkConfirmPassword(input1, input2, message) {
+  const inputMessage = document.getElementById(message);
+  const inputField = document.getElementById(input2);
   if (input1.value == input2.value) {
-    input2.classList.remove("is-invalid");
-    input2.classList.add("is-valid");
-    message.classList.add("d-none");
+    inputField.classList.remove("is-invalid");
+    inputField.classList.add("is-valid");
+    inputMessage.classList.add("d-none");
   } else {
-    input2.classList.remove("is-valid");
-    input2.classList.add("is-invalid");
-    message.classList.remove("d-none");
+    inputField.classList.remove("is-valid");
+    inputField.classList.add("is-invalid");
+    inputMessage.classList.remove("d-none");
   }
 }
 
-function validateField(inputField, regex, message) {
+function validateField(input, regex, message) {
+  const inputMessage = document.getElementById(message);
+  const inputField = document.getElementById(input);
   if (inputField.value.match(regex)) {
     inputField.classList.remove("is-invalid");
     inputField.classList.add("is-valid");
-    message.classList.add("d-none");
+    inputMessage.classList.add("d-none");
     return true;
   } else {
     inputField.classList.remove("is-valid");
     inputField.classList.add("is-invalid");
-    message.classList.remove("d-none");
+    inputMessage.classList.remove("d-none");
     return false;
   }
 }
