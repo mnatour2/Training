@@ -39,3 +39,7 @@ a {
   padding-left: 8px;
   color: blue;
 }
+
+svg {
+  width: 24px;
+}
