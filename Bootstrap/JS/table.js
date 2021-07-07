@@ -1,4 +1,4 @@
-const users = [
+let users = [
   {
     id: 1,
     username: "Mohammad_Natour",
@@ -37,14 +37,13 @@ function showDeleteModal(id) {
 
   spanDelete.textContent = id;
   spanDelete2.textContent = users.find((user) => user.id == id).username;
-  confirmBtn.onclick = confirmDelete(id);
+  confirmBtn.onclick = function () {
+    const index = users.findIndex((user) => user.id == id);
+    users = users.splice(index, 1);
+    document.querySelector(`tr[data-user-id="${id}"]`).remove();
+    myDeleteModal.hide();
+  };
   myDeleteModal.show();
-}
-
-function confirmDelete(id) {
-  const person = users.find((user) => user.id == id);
-  const index = users.indexOf(users.push(person));
-  users.splice(index, 1);
 }
 
 const getActionCol = function (id) {
@@ -58,8 +57,10 @@ const getActionCol = function (id) {
 tableBody.innerHTML = users
   .map(
     (user) =>
-      `<tr><td>${user.id}</td><td>${user.username}</td><td>${
-        user.email
-      }</td><td>${user.mobileNumber}</td><td>${getActionCol(user.id)}</td></tr>`
+      `<tr data-user-id="${user.id}"><td>${user.id}</td><td>${
+        user.username
+      }</td><td>${user.email}</td><td>${
+        user.mobileNumber
+      }</td><td>${getActionCol(user.id)}</td></tr>`
   )
   .reduce((prev, curr) => prev + curr);
