@@ -7,41 +7,12 @@ var passwordRegex =
   /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*\(\)_\+\-=\[\]{};':"\\\|,\.<>\/\?]).{8,}/;
 //mobile regex check if start with 05 and have 8 numbers after 05.
 var mobileRegex = /^\d{8}$/;
-
-const registerForm = document.querySelector("form#register-form");
-const loginForm = document.querySelector("form#login-form");
-
-if (registerForm) {
-  registerForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    validateField(
-      "validationTooltipUsername",
-      usernameRegex,
-      "usernameErrorMessage"
-    );
-    validateField("validationTooltip01", emailRegex, "emailErrorMessage");
-    const isPasswordValid = validateField(
-      "validationTooltip02",
-      passwordRegex,
-      "passwordErrorMessage"
-    );
-    if (isPasswordValid)
-      checkConfirmPassword(
-        "validationTooltip02",
-        "validationTooltip03",
-        "confrimPasswordErrorMessage"
-      );
-    validateField("validationTooltip04", mobileRegex, "mobileErrorMessage");
-  });
-}
-
-if (loginForm) {
-  loginForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    validateField("floatingInput", usernameRegex, "usernamePasswordWrong");
-    validateField("floatingPassword", passwordRegex, "usernamePasswordWrong");
-  });
-}
+//login regex check if fields are empty
+var loginRegex = /.{1,}/;
+// email regex check if contains dots and letters and ends with @vatrin.com
+var email_regex = /^[A-Za-z]+[A-Za-z\.]+(@vatrin\.com)$/g;
+//mobile regex check if start with 05 and have 8 numbers after 05.
+var mobile_regex = /^(05)\d{8}$/g;
 
 function checkConfirmPassword(input1, input2, message) {
   const inputMessage = document.getElementById(message);
@@ -71,4 +42,15 @@ function validateField(input, regex, message) {
     inputMessage.classList.remove("d-none");
     return false;
   }
+}
+
+function clear(inputsAndMessages) {
+  inputsAndMessages.forEach(({ input, message }) => {
+    const inputMessage = document.getElementById(message);
+    const inputField = document.getElementById(input);
+
+    inputField.classList.remove("is-invalid");
+    inputField.classList.remove("is-valid");
+    inputMessage.classList.add("d-none");
+  });
 }
