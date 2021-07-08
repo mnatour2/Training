@@ -56,11 +56,10 @@ function showDeleteModal(id) {
 
   spanDelete.textContent = id;
   spanDelete2.textContent = users.find((user) => user.id == id).username;
-
   const confirmBtn = document.querySelector("#confirmDeleteBtn");
   confirmBtn.onclick = function () {
     const index = users.findIndex((user) => user.id == id);
-    users = users.splice(index, 1);
+    users.splice(index, 1);
     document.querySelector(`tr[data-user-id="${id}"]`).remove();
     myDeleteModal.hide();
   };
