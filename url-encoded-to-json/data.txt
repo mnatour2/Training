@@ -1,0 +1,2 @@
+name=abed&age=25&phone=123456789
+name=aziz&age=20&phone=123456789
