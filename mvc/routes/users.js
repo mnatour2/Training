@@ -10,13 +10,14 @@ const connection = mysql.createConnection({
 });
 
 /* GET users listing. */
-router.get("/users", function (req, res, next) {
-  connection.query("SELECT * FROM users", function (err, results, fields) {
-    if (err) {
-      return next(err);
-    }
+
+router.get("/users", async function (req, res, next) {
+  try {
+    const [results] = await connection.promise().query("SELECT * FROM users");
     res.render("users", { users: results });
-  });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
