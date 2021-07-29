@@ -1,7 +1,9 @@
 var express = require("express");
 const mysql = require("mysql2");
 const { pbkdf2Sync } = require("crypto");
+const session = require("express-session");
 var router = express.Router();
+
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -9,12 +11,24 @@ const connection = mysql.createConnection({
   database: "training",
 });
 
+router.use(
+  session({
+    secret: "yeeee@yeeeeeeet",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
 router.get("/register", function (req, res, next) {
   res.render("register");
 });
 
 router.get("/login", function (req, res, next) {
-  res.render("login");
+  if (!req.session.loggedin) {
+    res.render("login");
+  } else {
+    res.redirect("home");
+  }
 });
 
 router.post("/register", async function (req, res, next) {
@@ -24,7 +38,7 @@ router.post("/register", async function (req, res, next) {
     const hash_password = derivedKey.toString("hex");
     await connection.promise().execute(`INSERT INTO users (username, password, email, mobile)
         VALUES ('${username}', '${hash_password}', '${email}', '${mobile}')`);
-    res.render("index", {
+    res.redirect("index", {
       username,
       password,
       confirmPassword,
@@ -51,7 +65,8 @@ router.post("/login", async function (req, res, next) {
       const derivedKey = pbkdf2Sync(password, username, 10000, 32, "sha512");
       hash_password = derivedKey.toString("hex");
       if (hash_password == user.password) {
-        res.render("home");
+        req.session.loggedin = true;
+        res.redirect("home");
       } else {
         throw new Error("Username or password is wrong.");
       }
