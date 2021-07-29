@@ -1,8 +1,7 @@
 var express = require("express");
 const mysql = require("mysql2");
 const { pbkdf2Sync } = require("crypto");
-const session = require("express-session");
-
+const { isGuest } = require("./middlewares");
 var router = express.Router();
 
 const connection = mysql.createConnection({
@@ -12,21 +11,13 @@ const connection = mysql.createConnection({
   database: "training",
 });
 
-router.get("/register", function (req, res, next) {
-  if (!req.session.loggedin) {
-    res.render("register");
-  } else {
-    res.redirect("home");
-  }
+router.get("/register", isGuest, function (req, res, next) {
+  res.render("register");
 });
 
-router.get("/login", function (req, res, next) {
-  if (!req.session.loggedin) {
-    res.render("login", { failed: req.session.loginFailed });
-    req.session.loginFailed = false;
-  } else {
-    res.redirect("home");
-  }
+router.get("/login", isGuest, function (req, res, next) {
+  res.render("login", { failed: req.session.loginFailed });
+  req.session.loginFailed = false;
 });
 
 router.post("/register", async function (req, res, next) {
