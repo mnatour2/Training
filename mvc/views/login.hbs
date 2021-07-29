@@ -15,7 +15,6 @@
   </head>
 
   <body class="text-center">
-
     <main class="form-signin">
       <form
         method="POST"
@@ -47,6 +46,13 @@
             class="w-100 text-start text-danger d-none"
             id="usernamePasswordWrong"
           >Please enter your username and password.</small>
+          {{#if failed}}
+            <small
+              class="w-100 text-start text-danger"
+              id="usernamePasswordWrong2"
+            >Wrong username or password.</small>
+          {{/if}}
+
         </div>
 
         <div class="form-check">

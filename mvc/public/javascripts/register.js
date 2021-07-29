@@ -2,21 +2,39 @@ const registerForm = document.querySelector("form#register-form");
 
 registerForm.addEventListener("submit", function (e) {
   e.preventDefault();
-  const isValid =
-    validateField(
-      "validationTooltipUsername",
-      usernameRegex,
-      "usernameErrorMessage"
-    ) && validateField("validationTooltip01", emailRegex, "emailErrorMessage");
-  validateField("validationTooltip02", passwordRegex, "passwordErrorMessage") &&
-    checkConfirmPassword(
-      "validationTooltip02",
-      "validationTooltip03",
-      "confrimPasswordErrorMessage"
-    ) &&
-    validateField("validationTooltip04", mobileRegex, "mobileErrorMessage");
+  const isUsernameValid = validateField(
+    "validationTooltipUsername",
+    usernameRegex,
+    "usernameErrorMessage"
+  );
+  const isEmailValid = validateField(
+    "validationTooltip01",
+    emailRegex,
+    "emailErrorMessage"
+  );
+  const isPasswordValid = validateField(
+    "validationTooltip02",
+    passwordRegex,
+    "passwordErrorMessage"
+  );
+  const isConfirmPasswordValid = checkConfirmPassword(
+    "validationTooltip02",
+    "validationTooltip03",
+    "confrimPasswordErrorMessage"
+  );
+  const isMobileValid = validateField(
+    "validationTooltip04",
+    mobileRegex,
+    "mobileErrorMessage"
+  );
 
-  if (isValid) {
+  if (
+    isUsernameValid &&
+    isEmailValid &&
+    isPasswordValid &&
+    isConfirmPasswordValid &&
+    isMobileValid
+  ) {
     const email = document.getElementById("validationTooltip01");
     email.value = email.value + "@vatrin.com";
     const mobile = document.getElementById("validationTooltip04");

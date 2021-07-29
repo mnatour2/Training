@@ -46,13 +46,27 @@ function validateField(input, regex, message) {
   }
 }
 
-function clear(inputsAndMessages) {
-  inputsAndMessages.forEach(({ input, message }) => {
-    const inputMessage = document.getElementById(message);
-    const inputField = document.getElementById(input);
-
+function validateFieldLogin(input, regex, message) {
+  const inputMessage = document.getElementById(message);
+  const inputField = document.getElementById(input);
+  if (inputField.value.match(regex)) {
     inputField.classList.remove("is-invalid");
-    inputField.classList.remove("is-valid");
     inputMessage.classList.add("d-none");
-  });
+    return true;
+  } else {
+    inputField.classList.add("is-invalid");
+    inputMessage.classList.remove("d-none");
+    return false;
+  }
 }
+
+// function clear(inputsAndMessages) {
+//   inputsAndMessages.forEach(({ input, message }) => {
+//     const inputMessage = document.getElementById(message);
+//     const inputField = document.getElementById(input);
+
+//     inputField.classList.remove("is-invalid");
+//     inputField.classList.remove("is-valid");
+//     inputMessage.classList.add("d-none");
+//   });
+// }

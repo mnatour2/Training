@@ -1,6 +1,5 @@
 var express = require("express");
 const mysql = require("mysql2");
-const session = require("express-session");
 var router = express.Router();
 
 const connection = mysql.createConnection({
@@ -9,14 +8,6 @@ const connection = mysql.createConnection({
   password: "admin",
   database: "training",
 });
-
-router.use(
-  session({
-    secret: "yeeee@yeeeeeeet",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
 
 /* GET users listing. */
 
