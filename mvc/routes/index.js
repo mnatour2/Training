@@ -1,15 +1,7 @@
 var express = require("express");
-const mysql = require("mysql2");
 const { pbkdf2Sync } = require("crypto");
 const { isGuest } = require("./middlewares");
 var router = express.Router();
-
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "admin",
-  database: "training",
-});
 
 router.get("/register", isGuest, function (req, res, next) {
   res.render("register");
@@ -20,13 +12,21 @@ router.get("/login", isGuest, function (req, res, next) {
   req.session.loginFailed = false;
 });
 
-router.post("/register", async function (req, res, next) {
+router.post("/register", isGuest, async function (req, res, next) {
   try {
-    const { username, password, confirmPassword, email, mobile } = req.body;
+    const {
+      body: { username, password, confirmPassword, email, mobile },
+      db,
+    } = req;
     const derivedKey = pbkdf2Sync(password, username, 10000, 32, "sha512");
     const hash_password = derivedKey.toString("hex");
-    await connection.promise().execute(`INSERT INTO users (username, password, email, mobile)
-        VALUES ('${username}', '${hash_password}', '${email}', '${mobile}')`);
+    await db("users").insert(
+      { username: username },
+      { password: hash_password },
+      { email: email },
+      { mobile: mobile }
+    );
+
     res.redirect("index", {
       username,
       password,
@@ -39,18 +39,19 @@ router.post("/register", async function (req, res, next) {
   }
 });
 
-router.post("/login", async function (req, res, next) {
+router.post("/login", isGuest, async function (req, res, next) {
   try {
-    const { username, password } = req.body;
+    const {
+      body: { username, password },
+      db,
+    } = req;
 
-    const [rows] = await connection
-      .promise()
-      .query(
-        `Select username,password from users WHERE username='${username}' limit 1`
-      );
+    const user = await db("users")
+      .select("username", "password")
+      .where("username", username)
+      .first();
 
-    if (rows.length > 0) {
-      const user = rows[0];
+    if (user) {
       const derivedKey = pbkdf2Sync(password, username, 10000, 32, "sha512");
       hash_password = derivedKey.toString("hex");
       if (hash_password == user.password) {

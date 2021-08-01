@@ -60,13 +60,13 @@ function validateFieldLogin(input, regex, message) {
   }
 }
 
-// function clear(inputsAndMessages) {
-//   inputsAndMessages.forEach(({ input, message }) => {
-//     const inputMessage = document.getElementById(message);
-//     const inputField = document.getElementById(input);
+function clear(inputsAndMessages) {
+  inputsAndMessages.forEach(({ input, message }) => {
+    const inputMessage = document.getElementById(message);
+    const inputField = document.getElementById(input);
 
-//     inputField.classList.remove("is-invalid");
-//     inputField.classList.remove("is-valid");
-//     inputMessage.classList.add("d-none");
-//   });
-// }
+    inputField.classList.remove("is-invalid");
+    inputField.classList.remove("is-valid");
+    inputMessage.classList.add("d-none");
+  });
+}
