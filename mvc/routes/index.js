@@ -18,22 +18,17 @@ router.post("/register", isGuest, async function (req, res, next) {
       body: { username, password, confirmPassword, email, mobile },
       db,
     } = req;
+    console.log(req.body.email);
     const derivedKey = pbkdf2Sync(password, username, 10000, 32, "sha512");
     const hash_password = derivedKey.toString("hex");
-    await db("users").insert(
-      { username: username },
-      { password: hash_password },
-      { email: email },
-      { mobile: mobile }
-    );
-
-    res.redirect("index", {
-      username,
-      password,
-      confirmPassword,
-      email,
-      mobile,
+    await db("users").insert({
+      username: username,
+      password: hash_password,
+      email: email,
+      mobile: mobile,
     });
+
+    res.redirect("/home");
   } catch (error) {
     next(error);
   }

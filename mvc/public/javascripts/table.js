@@ -62,19 +62,32 @@ function editContent(id) {
     Object.fromEntries(new FormData(document.getElementById("edit-form"))),
     function () {
       handleRes.call(this);
-
-      //1 check if request is OK
-
-      //2 extract user from response
-
-      //3 update table by user id and by column
-      // @see https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors
+      if (this.status === 200) {
+        const user = JSON.parse(this.responseText);
+        const userRow = document.querySelector(`tr[data-user-id="${id}"]`);
+        const usernameCol = userRow.querySelector('td[data-column="username"]');
+        usernameCol.textContent = user.username;
+        const emailCol = userRow.querySelector('td[data-column="email"]');
+        emailCol.textContent = user.email;
+        const mobileCol = userRow.querySelector('td[data-column="mobile"]');
+        mobileCol.textContent = user.mobile;
+      } else {
+        alert("something went wrong");
+      }
     }
   );
 }
 
 function deleteContent(id) {
-  sendRequest("DELETE", `/users/${id}`, null, handleRes);
+  sendRequest("DELETE", `/users/${id}`, null, function () {
+    handleRes.call(this);
+    if (this.status === 200) {
+      const userRow = document.querySelector(`tr[data-user-id="${id}"]`);
+      userRow.remove();
+    } else {
+      alert("something went wrong");
+    }
+  });
 }
 
 function showModal(id, type) {
