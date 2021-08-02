@@ -1,10 +1,10 @@
-const loginForm = document.querySelector("form#login-form");
+const loginForm = $("form#login-form");
 
-loginForm.addEventListener("submit", function (e) {
+loginForm.on("submit", function (e) {
   e.preventDefault();
 
-  let error_message = document.getElementById("usernamePasswordWrong2");
-  if (error_message) error_message.classList.add("d-none");
+  const error_message = $("#usernamePasswordWrong2");
+  if (error_message) error_message.addClass("d-none");
   const isUsernameValid = validateFieldLogin(
     "floatingInput",
     loginRegex,

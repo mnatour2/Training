@@ -34,88 +34,89 @@ function deleteForm(id, user) {
   </form>`;
 }
 
-function sendRequest(method, url, body, callback) {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = callback;
+// function sendRequest(method, url, body, callback) {
+//   const xhttp = new XMLHttpRequest();
+//   xhttp.onload = callback;
 
-  xhttp.open(method, url, true);
-  if (body) {
-    xhttp.setRequestHeader("content-type", "application/json");
-    xhttp.send(JSON.stringify(body));
-  } else {
-    xhttp.send();
-  }
-}
+//   xhttp.open(method, url, true);
+//   if (body) {
+//     xhttp.setRequestHeader("content-type", "application/json");
+//     xhttp.send(JSON.stringify(body));
+//   } else {
+//     xhttp.send();
+//   }
+// }
 
-function handleRes() {
-  if (this.status === 200) {
-    myModal.hide();
-  } else {
-    alert("something went wrong");
-  }
+function sendRequest(
+  method,
+  url,
+  body,
+  successCallback = null,
+  errorCallback = null
+) {
+  $.ajax({
+    url,
+    data: body,
+    success: successCallback,
+    error: errorCallback,
+    dataType: "json",
+    type: method,
+  });
 }
 
 function editContent(id) {
   sendRequest(
     "PATCH",
     `/users/${id}`,
-    Object.fromEntries(new FormData(document.getElementById("edit-form"))),
+    Object.fromEntries(new FormData($("#edit-form")[0])),
+    function (user) {
+      myModal.hide();
+      $(`tr[data-user-id="${id}"] td[data-column="username"]`).text(
+        user.username
+      );
+      $(`tr[data-user-id="${id}"] td[data-column="email"]`).text(user.email);
+      $(`tr[data-user-id="${id}"] td[data-column="mobile"]`).text(user.mobile);
+    },
     function () {
-      handleRes.call(this);
-      if (this.status === 200) {
-        const user = JSON.parse(this.responseText);
-        const userRow = document.querySelector(`tr[data-user-id="${id}"]`);
-        const usernameCol = userRow.querySelector('td[data-column="username"]');
-        usernameCol.textContent = user.username;
-        const emailCol = userRow.querySelector('td[data-column="email"]');
-        emailCol.textContent = user.email;
-        const mobileCol = userRow.querySelector('td[data-column="mobile"]');
-        mobileCol.textContent = user.mobile;
-      } else {
-        alert("something went wrong");
-      }
+      alert("something went wrong");
     }
   );
 }
 
 function deleteContent(id) {
-  sendRequest("DELETE", `/users/${id}`, null, function () {
-    handleRes.call(this);
-    if (this.status === 200) {
-      const userRow = document.querySelector(`tr[data-user-id="${id}"]`);
-      userRow.remove();
-    } else {
+  sendRequest(
+    "DELETE",
+    `/users/${id}`,
+    null,
+    function () {
+      myModal.hide();
+      $(`tr[data-user-id="${id}"]`).remove();
+    },
+    function (error) {
+      console.log(error);
       alert("something went wrong");
     }
-  });
+  );
 }
 
 function showModal(id, type) {
-  document
-    .getElementById("modalBtn")
-    .classList.remove("btn-success", "btn-danger");
+  $("#modalBtn").removeClass(["btn-success", "btn-danger"]);
 
   if (type == true) {
-    sendRequest("GET", `/users/${id}`, null, function () {
-      const user = JSON.parse(this.responseText);
-      document.getElementById("modalLabel").innerHTML = "Edit";
-      document.querySelector(".modal-body").innerHTML = editForm(id, user);
-      document.getElementById("modalBtn").classList.add("btn-success");
-      document.getElementById("modalBtn").innerHTML = "Submit";
-      document
-        .getElementById("modalBtn")
-        .setAttribute("onclick", `editContent(${id})`);
+    sendRequest("GET", `/users/${id}`, null, function (user) {
+      $("#modalLabel").text("Edit");
+      $(".modal-body").html(editForm(id, user));
+      $("#modalBtn").addClass("btn-success");
+      $("#modalBtn").text("Submit");
+      $("#modalBtn").attr("onclick", `editContent(${id})`);
     });
   } else {
-    sendRequest("GET", `/users/${id}`, null, function () {
-      const user = JSON.parse(this.responseText);
-      document.getElementById("modalLabel").innerHTML = "Delete";
-      document.querySelector(".modal-body").innerHTML = deleteForm(id, user);
-      document.getElementById("modalBtn").classList.add("btn-danger");
-      document.getElementById("modalBtn").innerHTML = "Delete";
-      document
-        .getElementById("modalBtn")
-        .setAttribute("onclick", `deleteContent(${id})`);
+    sendRequest("GET", `/users/${id}`, null, function (user) {
+      $("#modalLabel").text("Delete");
+      $(".modal-body").html(deleteForm(id, user));
+      $("#modalBtn").addClass("btn-danger");
+      $("#modalBtn").text("Delete");
+      $("#modalBtn").attr("onclick", `deleteContent(${id})`);
     });
   }
   myModal.show();

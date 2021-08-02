@@ -28,7 +28,7 @@ router.post("/register", isGuest, async function (req, res, next) {
       mobile: mobile,
     });
 
-    res.redirect("/home");
+    res.redirect("/login");
   } catch (error) {
     next(error);
   }

@@ -1,6 +1,6 @@
-const registerForm = document.querySelector("form#register-form");
+const registerForm = $("form#register-form");
 
-registerForm.addEventListener("submit", function (e) {
+registerForm.on("submit", function (e) {
   e.preventDefault();
   const isUsernameValid = validateField(
     "validationTooltipUsername",
@@ -18,8 +18,8 @@ registerForm.addEventListener("submit", function (e) {
     "passwordErrorMessage"
   );
   const isConfirmPasswordValid = checkConfirmPassword(
-    "validationTooltip02",
-    "validationTooltip03",
+    $("#validationTooltip02"),
+    $("#validationTooltip03"),
     "confrimPasswordErrorMessage"
   );
   const isMobileValid = validateField(
@@ -35,10 +35,10 @@ registerForm.addEventListener("submit", function (e) {
     isConfirmPasswordValid &&
     isMobileValid
   ) {
-    const email = document.getElementById("validationTooltip01");
-    email.value = email.value + "@vatrin.com";
-    const mobile = document.getElementById("validationTooltip04");
-    mobile.value = "05" + mobile.value;
+    $("#validationTooltip01").val(
+      $("#validationTooltip01").val() + "@vatrin.com"
+    );
+    $("#validationTooltip04").val("05" + $("#validationTooltip04").val());
     this.submit();
   }
 });

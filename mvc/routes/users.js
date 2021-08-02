@@ -2,8 +2,9 @@ var express = require("express");
 var router = express.Router();
 const { isUser } = require("./middlewares");
 
+router.use(isUser);
+
 router.get("/users", async function (req, res, next) {
-  //add the middleware isUser after compeleting the modal
   try {
     const results = await req
       .db("users")
@@ -53,7 +54,7 @@ router.delete("/users/:id", async function (req, res, next) {
   try {
     const id = req.params.id;
     const isDeleted = await req.db("users").where("id", id).del();
-    res.sendStatus(isDeleted ? 200 : 404);
+    res.sendStatus(isDeleted ? 204 : 404);
   } catch (error) {
     next(error);
   }
