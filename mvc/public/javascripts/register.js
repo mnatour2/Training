@@ -1,4 +1,6 @@
-$().ready(function () {
+/* global $ */
+
+$(() => {
   $("form#register-form").validate({
     rules: {
       username: {
@@ -15,82 +17,49 @@ $().ready(function () {
       },
       confirmPassword: {
         required: true,
-        minlength: 8,
-        equalTo: "#validationTooltip02",
+        equalTo: "#registerPassword",
       },
       mobile: {
         required: true,
-        minlength: 8,
-        maxlength: 8,
+        minlength: 10,
+        maxlength: 10,
       },
     },
     messages: {
       username: {
         required: "Please enter a username",
-        minlength: "Invalid username",
+        minlength:
+          "Username must contain numbers, letters, underscore and between 10-30 characters.",
       },
       email: {
         required: "Please enter a email",
+        // Email must contain letters, dots and ends with @vatrin.com
       },
       password: {
         required: "Please enter a password",
-        minlength: "Invalid password",
+        minlength: "Password must be at least 8 characters",
+        // "Password must contain the following: A lowercase letter, A capital (uppercase) letter, A number, Minimum 8 characters.",
       },
       confirmPassword: {
-        required: "Please confirm the password",
-        minlength: "Invalid password",
-        equalTo: "Please match the passwords",
+        required: "Please re-enter the password",
+        equalTo: "Passwords don't match",
       },
       mobile: {
-        required: "Please enter a password",
-        minlength: "Invalid mobile",
-        maxlength: "Invalid mobile",
+        required: "Please enter a mobile number",
+        minlength: "Mobile must start with 05 and 8 numbers after it.",
+        maxlength: "Mobile must start with 05 and 8 numbers after it.",
       },
+    },
+    errorElement: "small",
+    errorClass: "w-100 text-start text-danger",
+    errorPlacement(error, element) {
+      error.insertAfter($(element));
+    },
+    highlight(element) {
+      $(element).addClass("is-invalid");
+    },
+    unhighlight(element) {
+      $(element).removeClass("is-invalid");
     },
   });
 });
-
-// const registerForm = $("form#register-form");
-
-// registerForm.on("submit", function (e) {
-//   e.preventDefault();
-//   const isUsernameValid = validateField(
-//     "validationTooltipUsername",
-//     usernameRegex,
-//     "usernameErrorMessage"
-//   );
-//   const isEmailValid = validateField(
-//     "validationTooltip01",
-//     emailRegex,
-//     "emailErrorMessage"
-//   );
-//   const isPasswordValid = validateField(
-//     "validationTooltip02",
-//     passwordRegex,
-//     "passwordErrorMessage"
-//   );
-//   const isConfirmPasswordValid = checkConfirmPassword(
-//     $("#validationTooltip02"),
-//     $("#validationTooltip03"),
-//     "confrimPasswordErrorMessage"
-//   );
-//   const isMobileValid = validateField(
-//     "validationTooltip04",
-//     mobileRegex,
-//     "mobileErrorMessage"
-//   );
-
-//   if (
-//     isUsernameValid &&
-//     isEmailValid &&
-//     isPasswordValid &&
-//     isConfirmPasswordValid &&
-//     isMobileValid
-//   ) {
-//     $("#validationTooltip01").val(
-//       $("#validationTooltip01").val() + "@vatrin.com"
-//     );
-//     $("#validationTooltip04").val("05" + $("#validationTooltip04").val());
-//     this.submit();
-//   }
-// });

@@ -17,121 +17,99 @@
   </head>
 
   <body class="text-center">
-
     <main class="form-signin" style="max-width: 500px;">
-
       <form
         method="POST"
         id="register-form"
         class="row g-3 needs-validation"
+        enctype="multipart/form-data"
         novalidate
       >
-        <h1 class="h3 mb-3 fw-normal">Register</h1>
-        <div class="input-group col-md-12 text-start">
-          <label
-            for="validationTooltipUsername"
-            class="form-label col-md-12"
-            id="inputGroup-sizing-default"
-          >Username</label>
+        <h1 class="h1 m-2 fw-normal">Register</h2>
+
+
+        <div class="form-floating text-start">
           <input
             name="username"
             type="text"
             class="form-control"
-            aria-label="inputGroupPrepend"
-            id="validationTooltipUsername"
-            aria-describedby="inputGroup-sizing-default"
+            id="registerUsername"
+            placeholder="Username"
           />
-          <small
-            class="w-100 text-danger d-none"
-            id="usernameErrorMessage"
-          >Username must contain numbers, letters, underscore and between 10-30
-            characters.</small>
+          <label for="registerUsername">Username</label>
         </div>
 
-        <div class="input-group col-md-12 text-start">
-          <label
-            for="validationTooltip01"
-            class="form-label col-md-12"
-          >Email</label>
+        <div class="form-floating text-start"> 
           <input
             name="email"
-            type="text"
+            type="email"
             class="form-control"
-            id="validationTooltip01"
-            aria-label="inputGroupPrepend"
-            aria-describedby="inputGroup-sizing-default"
+            id="registerEmail"
+            placeholder="Email"
             required
           />
-          <span
-            class="input-group-text bg-light"
-            id="basic-addon2"
-          >@vatrin.com</span>
-          <small class="w-100 text-danger d-none" id="emailErrorMessage">Email
-            must contain letters, dots and ends with @vatrin.com</small>
+          <label for="registerEmail">Email</label>
         </div>
 
-        <div class="input-group col-md-12 text-start">
-          <label
-            for="validationTooltip02"
-            class="form-label col-md-12"
-          >Password</label>
+        <div class="form-floating text-start">
           <input
             name="password"
             type="password"
-            class="form-control m-0"
-            id="validationTooltip02"
-            aria-label="inputGroupPrepend"
-            aria-describedby="inputGroup-sizing-default"
+            class="form-control"
+            id="registerPassword"
+            placeholder="Password"
             required
           />
-          <small
-            class="w-100 text-danger d-none"
-            id="passwordErrorMessage"
-          >Password must contain the following: A lowercase letter, A capital
-            (uppercase) letter, A number, Minimum 8 characters.</small>
+          <label for="registerPassword">Password</label>
         </div>
-        <div class="input-group col-md-12 text-start">
-          <label for="validationTooltip03" class="form-label col-md-12">Confirm
-            Password</label>
+
+        <div class="form-floating text-start">
           <input
             name="confirmPassword"
             type="password"
-            class="form-control m-0"
-            id="validationTooltip03"
-            aria-label="inputGroupPrepend"
-            aria-describedby="inputGroup-sizing-default"
+            class="form-control"
+            id="registerConfirmPassword"
+            placeholder="Confrim Password"
             required
           />
-          <small
-            class="w-100 text-danger d-none"
-            id="confrimPasswordErrorMessage"
-          >Passwords don't match.</small>
+          <label for="registerConfirmPassword">Confirm Password</label>
         </div>
-        <div class="input-group col-md-12 text-start">
-          <label for="validationTooltip04" class="form-label col-md-12">Mobile
-            Number</label>
-          <span
-            class="input-group-text bg-light"
-            id="inputGroupPrepend"
-          >05</span>
+
+        <div class="form-floating text-start">
           <input
             name="mobile"
             type="tel"
             class="form-control"
-            id="validationTooltip04"
-            aria-describedby="inputGroupPrepend"
+            id="regsiterMobile"
+            placeholder="Mobile number"
             required
           />
-          <small class="w-100 text-danger d-none" id="mobileErrorMessage">Mobile
-            must start with 05 and 8 numbers after it.</small>
+          <label for="regsiterMobile">Mobile number</label>
         </div>
+
+        <div class="input-group col-md-12 text-start">
+          <label for="registerPhoto" class="form-label col-md-12">Profile
+            picture</label>
+          <input
+            name="picture"
+            id="registerPhoto"
+            type="file"
+            class="form-control"
+            aria-label="file example"
+            aria-describedby="inputGroup-sizing-default"
+            required
+          />
+        </div>
+
         <div class="col-12">
           <button class="btn btn-primary" type="submit">Register</button>
         </div>
+
         <div>
           Already have an account ?
           <a href="/login">Login</a>
         </div>
+
       </form>
     </main>
 

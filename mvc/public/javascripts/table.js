@@ -1,4 +1,6 @@
-var myModal = new bootstrap.Modal("#yee");
+/* global $ */
+
+const myModal = new bootstrap.Modal("#yee");
 
 function editForm(id, user) {
   return `
@@ -34,19 +36,6 @@ function deleteForm(id, user) {
   </form>`;
 }
 
-// function sendRequest(method, url, body, callback) {
-//   const xhttp = new XMLHttpRequest();
-//   xhttp.onload = callback;
-
-//   xhttp.open(method, url, true);
-//   if (body) {
-//     xhttp.setRequestHeader("content-type", "application/json");
-//     xhttp.send(JSON.stringify(body));
-//   } else {
-//     xhttp.send();
-//   }
-// }
-
 function sendRequest(
   method,
   url,
@@ -69,7 +58,7 @@ function editContent(id) {
     "PATCH",
     `/users/${id}`,
     Object.fromEntries(new FormData($("#edit-form")[0])),
-    function (user) {
+    (user) => {
       myModal.hide();
       $(`tr[data-user-id="${id}"] td[data-column="username"]`).text(
         user.username
@@ -77,7 +66,7 @@ function editContent(id) {
       $(`tr[data-user-id="${id}"] td[data-column="email"]`).text(user.email);
       $(`tr[data-user-id="${id}"] td[data-column="mobile"]`).text(user.mobile);
     },
-    function () {
+    () => {
       alert("something went wrong");
     }
   );
@@ -88,11 +77,11 @@ function deleteContent(id) {
     "DELETE",
     `/users/${id}`,
     null,
-    function () {
+    () => {
       myModal.hide();
       $(`tr[data-user-id="${id}"]`).remove();
     },
-    function (error) {
+    (error) => {
       console.log(error);
       alert("something went wrong");
     }
@@ -102,8 +91,8 @@ function deleteContent(id) {
 function showModal(id, type) {
   $("#modalBtn").removeClass(["btn-success", "btn-danger"]);
 
-  if (type == true) {
-    sendRequest("GET", `/users/${id}`, null, function (user) {
+  if (type === true) {
+    sendRequest("GET", `/users/${id}`, null, (user) => {
       $("#modalLabel").text("Edit");
       $(".modal-body").html(editForm(id, user));
       $("#modalBtn").addClass("btn-success");
@@ -111,7 +100,7 @@ function showModal(id, type) {
       $("#modalBtn").attr("onclick", `editContent(${id})`);
     });
   } else {
-    sendRequest("GET", `/users/${id}`, null, function (user) {
+    sendRequest("GET", `/users/${id}`, null, (user) => {
       $("#modalLabel").text("Delete");
       $(".modal-body").html(deleteForm(id, user));
       $("#modalBtn").addClass("btn-danger");

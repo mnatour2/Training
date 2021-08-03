@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "amd",
+    "target": "es6",
+    "watch": true
+  },
+  "typeAcquisition": {
+    "include": ["jquery", "jquery-validation", "bootstrap"]
+  },
+  "typingOptions": {
+    "enableAutoDiscovery": true
+  }
+}

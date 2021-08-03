@@ -28,26 +28,22 @@
         <div class="form-floating">
           <input
             name="username"
-            type="email"
-            class="form-control"
-            id="floatingInput"
+            type="text"
+            class="form-control mb-2"
+            id="loginUsername"
             placeholder="Username"
           />
-          <label for="floatingInput">Username</label>
+          <label for="loginUsername">Username</label>
         </div>
         <div class="form-floating">
           <input
             name="password"
             type="password"
             class="form-control"
-            id="floatingPassword"
+            id="loginPassword"
             placeholder="Password"
           />
-          <label for="floatingPassword">Password</label>
-          <small
-            class="w-100 text-start text-danger d-none"
-            id="usernamePasswordWrong"
-          >Please enter your username and password.</small>
+          <label for="loginPassword">Password</label>
           {{#if failed}}
             <small
               class="w-100 text-start text-danger"

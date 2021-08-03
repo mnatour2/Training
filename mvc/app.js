@@ -1,13 +1,14 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const Knex = require("knex");
-var app = express();
+const logger = require("morgan");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+
+const app = express();
 
 const knex = Knex({
   client: "mysql2",
@@ -45,7 +46,7 @@ const knex = Knex({
   },
 });
 
-app.use((req, res, next) => {
+app.use((/** @type {express.Request} */ req, res, next) => {
   req.db = knex;
   next();
 });
@@ -68,17 +69,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/static", express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/", indexRouter);
 app.use("/", usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};

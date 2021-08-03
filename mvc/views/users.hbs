@@ -23,6 +23,7 @@
             <th>Username</th>
             <th>Email</th>
             <th>Mobile number</th>
+            <th>Profile picture</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -33,6 +34,7 @@
               <td data-column="username">{{this.username}}</td>
               <td data-column="email">{{this.email}}</td>
               <td data-column="mobile">{{this.mobile}}</td>
+              <td data-column="picture"><img class="rounded float-start" src="{{this.picture}}"></td>
               <td>
                 <button
                   class="btn btn-outline-warning btn-sm me-2 btn-edit"

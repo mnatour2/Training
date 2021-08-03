@@ -1,9 +1,11 @@
-$().ready(function () {
+/* global $ */
+
+$(() => {
   $("form#login-form").validate({
     rules: {
       username: {
         required: true,
-        minlength: 2,
+        minlength: 10,
       },
       password: {
         required: true,
@@ -13,35 +15,23 @@ $().ready(function () {
     messages: {
       username: {
         required: "Please enter a username",
-        minlength: "wrong username or password",
+        minlength: "Username must be at least 10 characters",
       },
       password: {
         required: "Please enter a password",
-        minlength: "invalid username or password",
+        minlength: "Password must be at least 8 characters",
       },
+    },
+    errorElement: "small",
+    errorClass: "w-100 text-start text-danger",
+    errorPlacement(error, element) {
+      error.insertAfter($(element).siblings("label"));
+    },
+    highlight(element) {
+      $(element).addClass("is-invalid");
+    },
+    unhighlight(element) {
+      $(element).removeClass("is-invalid");
     },
   });
 });
-
-// const loginForm = $("form#login-form");
-
-// loginForm.on("submit", function (e) {
-//   e.preventDefault();
-
-//   const error_message = $("#usernamePasswordWrong2");
-//   if (error_message) error_message.addClass("d-none");
-//   const isUsernameValid = validateFieldLogin(
-//     "floatingInput",
-//     loginRegex,
-//     "usernamePasswordWrong"
-//   );
-//   const isPasswordValid = validateFieldLogin(
-//     "floatingPassword",
-//     loginRegex,
-//     "usernamePasswordWrong"
-//   );
-
-//   if (isUsernameValid && isPasswordValid) {
-//     this.submit();
-//   }
-// });
