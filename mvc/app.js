@@ -3,48 +3,12 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const Knex = require("knex");
 const logger = require("morgan");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const knex = require("./knex/knex");
 
 const app = express();
-
-const knex = Knex({
-  client: "mysql2",
-  debug: true,
-  log: {
-    debug(message) {
-      if (Array.isArray(message)) {
-        for (const object of message) {
-          console.log(
-            "\u001B[36m",
-            "\u001B[40m",
-            object.sql,
-            " \u001B[32m",
-            object.bindings,
-            "\u001B[0m"
-          );
-        }
-      } else {
-        console.log(
-          "\u001B[36m",
-          "\u001B[40m",
-          message.sql,
-          " \u001B[32m",
-          message.bindings,
-          "\u001B[0m"
-        );
-      }
-    },
-  },
-  connection: {
-    host: "localhost",
-    user: "root",
-    password: "admin",
-    database: "training",
-  },
-});
 
 app.use((/** @type {express.Request} */ req, res, next) => {
   req.db = knex;
