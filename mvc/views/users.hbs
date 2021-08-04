@@ -14,6 +14,53 @@
   </head>
 
   <body class="text-center position-relative">
+    <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand active" href="/home">Company</a>
+        <div class="collapse navbar-collapse justify-content-end">
+
+          <ul class="navbar-nav me-2 mb-0 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="/users">Users</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              > Movies
+              </a>
+              <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Add a movie</a></li>
+                <li><a class="dropdown-item" href="#">View movies</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              > Actors
+              </a>
+              <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Add an actor</a></li>
+                <li><a class="dropdown-item" href="#">View actors</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout" tabindex="-1">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <div class="table-responsive w-100 position-absolute top-0 p-3">
       <table class="table table-hover h-100 w-100 caption-top">
         <caption class="text-center"><b>Table of users</b></caption>
@@ -131,7 +178,6 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <script src="/static/javascripts/validate.js"></script>
     <script src="/static/javascripts/table.js"></script>
   </body>
 

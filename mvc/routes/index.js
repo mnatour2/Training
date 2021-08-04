@@ -84,7 +84,7 @@ router.post(
   }
 );
 
-router.get("/home", (req, res, next) => {
+router.get("/home", isUser, (req, res, next) => {
   res.render("home");
 });
 

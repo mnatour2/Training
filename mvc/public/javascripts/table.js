@@ -66,7 +66,8 @@ function editContent(id) {
       $(`tr[data-user-id="${id}"] td[data-column="email"]`).text(user.email);
       $(`tr[data-user-id="${id}"] td[data-column="mobile"]`).text(user.mobile);
     },
-    () => {
+    (error) => {
+      console.log(error);
       alert("something went wrong");
     }
   );
