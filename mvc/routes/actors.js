@@ -42,6 +42,10 @@ router.get("/actors", async (/** @type {express.Request} */ req, res, next) => {
     const results = await req
       .db("actors")
       .select("id", "full_name", "date_of_birth", "image");
+    results.map((actor) => {
+      actor.date_of_birth = actor.date_of_birth.toDateString();
+      return actor;
+    });
     res.render("actors", { actors: results });
   } catch (error) {
     next(error);

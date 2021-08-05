@@ -8,7 +8,6 @@ exports.up = (knex) =>
     table.string("year").notNullable();
     table.string("country").notNullable();
     table.string("poster");
-    //   table.string("main_actors").notNullable();
   });
 /**
  * @param {import('knex').Knex} knex

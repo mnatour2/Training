@@ -1,6 +1,8 @@
 /* global $ */
 
 $(() => {
+  $(".select2-multiple").select2();
+
   $("form#movies-form").validate({
     rules: {
       movieName: {

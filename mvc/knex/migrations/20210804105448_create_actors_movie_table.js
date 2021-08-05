@@ -2,7 +2,7 @@
  * @param {import('knex').Knex} knex
  */
 exports.up = (knex) =>
-  knex.schema.createTable("actors_movie", (table) => {
+  knex.schema.createTable("actors_movies", (table) => {
     table.increments();
     table.integer("actor_id").unsigned().notNullable();
     table.integer("movie_id").unsigned().notNullable();
