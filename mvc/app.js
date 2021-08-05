@@ -7,7 +7,7 @@ const logger = require("morgan");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const actorsRouter = require("./routes/actors");
-// const moviesRouter = require("./routes/movies");
+const moviesRouter = require("./routes/movies");
 const knex = require("./knex/knex");
 
 const app = express();
@@ -40,7 +40,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/", indexRouter);
 app.use("/", usersRouter);
 app.use("/", actorsRouter);
-// app.use("/", moviesRouter);
+app.use("/", moviesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

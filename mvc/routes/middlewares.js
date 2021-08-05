@@ -2,7 +2,7 @@ function isGuest(req, res, next) {
   if (!req.session.loggedin) {
     next();
   } else {
-    res.redirect("home");
+    res.redirect("/home");
   }
 }
 
@@ -10,7 +10,7 @@ function isUser(req, res, next) {
   if (req.session.loggedin) {
     next();
   } else {
-    res.redirect("login");
+    res.redirect("/login");
   }
 }
 

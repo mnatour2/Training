@@ -10,14 +10,14 @@
     />
     <link href="/static/stylesheets/style.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Register</title>
+    <title>ActorsTable</title>
   </head>
 
-  <body>
+  <body class="text-center position-relative">
     {{! topnav }}
     <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand active" href="/home">Company</a>
+        <a class="navbar-brand" href="/home">Company</a>
         <div class="collapse navbar-collapse justify-content-end">
 
           <ul class="navbar-nav me-2 mb-0 mb-lg-0">
@@ -43,7 +43,7 @@
 
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class="nav-link dropdown-toggle active"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -54,7 +54,7 @@
               </a>
               <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/actors/create">Add an actor</a></li>
-                <li><a class="dropdown-item" href="/actors">View actors</a></li>
+                <li><a class="dropdown-item" href="#">View actors</a></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -64,10 +64,38 @@
         </div>
       </div>
     </nav>
+    {{! table }}
+    <div class="table-responsive w-100 position-absolute top-0 p-3">
+      <table class="table table-hover h-100 w-100 caption-top">
+        <caption class="text-center"><b>Table of actors</b></caption>
+        <thead class="border-dark">
+          <tr>
+            <th>ID</th>
+            <th>Full name</th>
+            <th>Date of birth</th>
+            <th>Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each actors}}
+            <tr data-user-id="{{this.id}}">
+              <td>{{this.id}}</td>
+              <td data-column="fullname">{{this.full_name}}</td>
+              <td data-column="dateOfBirth">{{this.date_of_birth}}</td>
+              <td data-column="image"><img
+                  class="rounded float-start"
+                  src="{{this.image}}"
+                /></td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
   </body>
+
 </html>

@@ -10,18 +10,22 @@
     />
     <link href="/static/stylesheets/style.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>UsersTable</title>
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"
+    ></script>
+    <title>ActorsTable</title>
   </head>
 
   <body class="text-center position-relative">
+    {{! topnav }}
     <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand active" href="#">Company</a>
+        <a class="navbar-brand" href="/home">Company</a>
         <div class="collapse navbar-collapse justify-content-end">
 
           <ul class="navbar-nav me-2 mb-0 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Users</a>
+              <a class="nav-link" href="/users">Users</a>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -32,17 +36,17 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Actors
+                Movies
               </a>
               <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Add a movie</a></li>
-                <li><a class="dropdown-item" href="#">View movies</a></li>
+                <li><a class="dropdown-item" href="/movies/create">Add a movie</a></li>
+                <li><a class="dropdown-item" href="/movies">View movies</a></li>
               </ul>
             </li>
 
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class="nav-link dropdown-toggle active"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -53,7 +57,7 @@
               </a>
               <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#">Add an actor</a></li>
-                <li><a class="dropdown-item" href="#">View actors</a></li>
+                <li><a class="dropdown-item" href="/actors">View actors</a></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -63,37 +67,65 @@
         </div>
       </div>
     </nav>
-    <div class="table-responsive w-100 position-absolute top-0 p-3">
-      <table class="table table-hover h-100 w-100 caption-top">
-        <caption class="text-center"><b>Table of users</b></caption>
-        <thead class="border-dark">
-          <tr>
-            <th>ID</th>
-            <th>Full name</th>
-            <th>Date of birth</th>
-            <th>Image</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each actors}}
-            <tr data-user-id="{{this.id}}">
-              <td>{{this.id}}</td>
-              <td data-column="fullname">{{this.fullname}}</td>
-              <td data-column="dateOfBirth">{{this.dateOfBirth}}</td>
-              <td data-column="image"><img
-                  class="rounded float-start"
-                  src="{{this.image}}"
-                /></td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
-    </div>
+    <main class="form-signin" style="max-width: 500px;">
+      <form
+        method="POST"
+        id="actors-form"
+        class="row g-3 needs-validation"
+        enctype="multipart/form-data"
+        novalidate
+      >
+        <h1 class="h1 m-2 fw-normal">Create a new actor</h2>
+
+        <div class="form-floating text-start">
+          <input
+            name="fullName"
+            type="text"
+            class="form-control"
+            id="actorFullName"
+            placeholder="Full name"
+          />
+          <label for="actorFullName">Full Name</label>
+        </div>
+
+        <div class="form-floating text-start"> 
+          <input
+            name="dateOfBirth"
+            type="date"
+            class="form-control"
+            id="actorDateOfbirth"
+            placeholder="Email"
+            required
+          />
+          <label for="actorDateOfbirth">Date of birth</label>
+        </div>
+
+        <div class="input-group col-md-12 text-start">
+          <label for="actorImage" class="form-label col-md-12">Image</label>
+          <input
+            name="image"
+            id="actorImage"
+            type="file"
+            class="form-control"
+            aria-label="file example"
+            aria-describedby="inputGroup-sizing-default"
+            required
+          />
+        </div>
+
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+        
+      </form>
+    </main>
+    
     <script
       src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script src="/static/javascripts/actors.js"></script>
   </body>
 
 </html>

@@ -14,6 +14,7 @@
   </head>
 
   <body class="text-center position-relative">
+    {{!-- topnav --}}
     <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand active" href="/home">Company</a>
@@ -34,8 +35,8 @@
               > Movies
               </a>
               <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Add a movie</a></li>
-                <li><a class="dropdown-item" href="#">View movies</a></li>
+                <li><a class="dropdown-item" href="/movies/create">Add a movie</a></li>
+                <li><a class="dropdown-item" href="/movies">View movies</a></li>
               </ul>
             </li>
 
@@ -50,8 +51,8 @@
               > Actors
               </a>
               <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Add an actor</a></li>
-                <li><a class="dropdown-item" href="#">View actors</a></li>
+                <li><a class="dropdown-item" href="/actors/create">Add an actor</a></li>
+                <li><a class="dropdown-item" href="/actors">View actors</a></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -61,6 +62,7 @@
         </div>
       </div>
     </nav>
+    {{!-- table --}}
     <div class="table-responsive w-100 position-absolute top-0 p-3">
       <table class="table table-hover h-100 w-100 caption-top">
         <caption class="text-center"><b>Table of users</b></caption>
@@ -133,6 +135,7 @@
         </tbody>
       </table>
     </div>
+    {{!-- modal --}}
     <div
       class="modal fade"
       id="yee"
