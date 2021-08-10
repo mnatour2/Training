@@ -57,44 +57,43 @@ router.post(
 
 router.get("/movies", async (/** @type {express.Request} */ req, res, next) => {
   try {
-    // knex.select('*').from('users').join('accounts', function() {
-    //   this.on(function() {
-    //     this.on('accounts.id', '=', 'users.account_id')
-    //     this.orOn('accounts.owner_id', '=', 'users.id')
-    //   })
-    // })
-    let results = await req.db
+    const results = await req.db
       .select(
         "movies.id",
         "movie_name",
         "year",
         "country",
         "poster",
-        "full_name"
+        req.db.raw('group_concat(full_name separator ", ") as actors')
       )
       .from("movies")
-      // eslint-disable-next-line func-names
-      .join("actors_movies", function () {
-        this.on("movies.id", "=", "actors_movies.movie_id");
-      })
-      // eslint-disable-next-line func-names
-      .join("actors", function () {
-        this.on("actors_movies.actor_id", "=", "actors.id");
-      });
+      .innerJoin("actors_movies", "movies.id", "actors_movies.movie_id")
+      .innerJoin("actors", "actors_movies.actor_id", "actors.id")
+      .groupBy("movies.id");
 
-    results = results.reduce((prev, curr) => {
-      const duplicateMovie = prev.find((item) => item.id === curr.id);
-      if (duplicateMovie) {
-        duplicateMovie.full_name += `, ${curr.full_name}`;
-      }
-
-      return [...prev, curr];
-    }, []);
-    // TODO group concat knex
     res.render("movies", { movies: results });
   } catch (error) {
     next(error);
   }
 });
+
+router.post(
+  "/movies/:id/favorite",
+  async (/** @type {express.Request} */ req, res, next) => {
+    try {
+      const {
+        session: { userId },
+        params: { id },
+      } = req;
+      await req.db("users_favorites").insert({
+        user_id: userId,
+        movie_id: id,
+      });
+      res.sendStatus(200);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = router;

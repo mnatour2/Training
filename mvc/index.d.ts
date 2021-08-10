@@ -10,5 +10,6 @@ declare module "express-session" {
   interface SessionData {
     loginFailed?: boolean;
     loggedin?: boolean;
+    userId?: number;
   }
 }

@@ -133,10 +133,12 @@
         </div>
 
         <div class="input-group col-md-12 text-start">
+          <label for="actorSelect" class="form-label col-md-12">Actors</label>
           <select
             class="select2-multiple w-100"
             name="actors[]"
             multiple="multiple"
+            id="actorSelect"
             required
           >
             {{#each actors}}
@@ -156,7 +158,7 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <script src="/static/javascripts/movies.js"></script>
+    <script src="/static/javascripts/movies/createMovie.js"></script>
   </body>
 
 </html>

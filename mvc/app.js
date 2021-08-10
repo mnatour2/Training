@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const KnexSessionStore = require("connect-session-knex")(session);
 const logger = require("morgan");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -12,6 +13,10 @@ const knex = require("./knex/knex");
 
 const app = express();
 
+const store = new KnexSessionStore({
+  knex,
+});
+
 app.use((/** @type {express.Request} */ req, res, next) => {
   req.db = knex;
   next();
@@ -19,10 +24,11 @@ app.use((/** @type {express.Request} */ req, res, next) => {
 
 app.use(
   session({
+    store,
     secret: "yeeee@yeeeeeeet",
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: false },
+    cookie: { secure: false, maxAge: 1000000 },
   })
 );
 

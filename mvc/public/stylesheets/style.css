@@ -43,3 +43,30 @@ a {
 svg {
   width: 24px;
 }
+
+#iqona {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+#iqona button {
+  padding: 4px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#iqona svg {
+  width: 40px;
+}
+
+#heartFill {
+  display: none;
+}
+
+#iqona button:hover #heartFill {
+  display: block;
+}
+
+#iqona button:hover #heartNotFill {
+  display: none;
+}

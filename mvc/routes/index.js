@@ -62,7 +62,7 @@ router.post(
       } = req;
 
       const user = await db("users")
-        .select("username", "password")
+        .select("id", "username", "password")
         .where("username", username)
         .first();
 
@@ -71,6 +71,7 @@ router.post(
         const hashPassword = derivedKey.toString("hex");
         if (hashPassword === user.password) {
           req.session.loggedin = true;
+          req.session.userId = user.id;
           res.redirect("home");
           return;
         }
