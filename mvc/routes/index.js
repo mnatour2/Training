@@ -3,7 +3,20 @@ const multer = require("multer");
 const { pbkdf2Sync } = require("crypto");
 const { isGuest, isUser } = require("./middlewares");
 
-const upload = multer({ dest: "uploads/" });
+const upload = multer({
+  dest: "uploads/",
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype === "image/png" ||
+      file.mimetype === "image/jpg" ||
+      file.mimetype === "image/jpeg"
+    ) {
+      return cb(null, true);
+    }
+    cb(null, false);
+    return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+  },
+});
 const router = express.Router();
 
 router.get("/register", isGuest, (req, res, next) => {

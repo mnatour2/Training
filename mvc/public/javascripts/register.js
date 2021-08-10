@@ -24,6 +24,10 @@ $(() => {
         minlength: 10,
         maxlength: 10,
       },
+      picture: {
+        required: true,
+        extension: "png|jpg|jpeg",
+      },
     },
     messages: {
       username: {
@@ -48,6 +52,10 @@ $(() => {
         required: "Please enter a mobile number",
         minlength: "Mobile must start with 05 and 8 numbers after it.",
         maxlength: "Mobile must start with 05 and 8 numbers after it.",
+      },
+      picture: {
+        required: "Please enter a poster",
+        extension: "Please enter a image file",
       },
     },
     errorElement: "small",

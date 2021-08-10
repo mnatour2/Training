@@ -9,6 +9,10 @@ $(() => {
       dateOfBirth: {
         required: true,
       },
+      image: {
+        required: true,
+        extension: "png|jpg|jpeg",
+      },
     },
     messages: {
       fullName: {
@@ -16,6 +20,10 @@ $(() => {
       },
       dateOfBirth: {
         required: "Please enter a date of birth",
+      },
+      image: {
+        required: "Please enter a poster",
+        extension: "Please enter a image file",
       },
     },
     errorElement: "small",

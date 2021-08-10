@@ -1,7 +1,20 @@
 const express = require("express");
 const multer = require("multer");
 
-const upload = multer({ dest: "uploads/" });
+const upload = multer({
+  dest: "uploads/",
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype === "image/png" ||
+      file.mimetype === "image/jpg" ||
+      file.mimetype === "image/jpeg"
+    ) {
+      return cb(null, true);
+    }
+    cb(null, false);
+    return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+  },
+});
 const router = express.Router();
 const { isUser } = require("./middlewares");
 
@@ -76,7 +89,6 @@ router.get("/movies", async (/** @type {express.Request} */ req, res, next) => {
       .innerJoin("actors", "actors_movies.actor_id", "actors.id")
       .groupBy("movies.id");
 
-    console.log(results);
     res.render("movies", { movies: results });
   } catch (error) {
     next(error);
@@ -111,6 +123,38 @@ router.post(
       res.status(200).json({
         isFavorite: !isFavorite,
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.get(
+  "/movies/favorites",
+  async (/** @type {express.Request} */ req, res, next) => {
+    try {
+      const {
+        session: { userId },
+      } = req;
+      const results = await req.db
+        .select(
+          "movies.id",
+          "movie_name",
+          "year",
+          "country",
+          "poster",
+          req.db.raw('group_concat(full_name separator ", ") as actors'),
+          req.db.raw(`coalesce(
+            (select distinct true from users_favorites where movie_id = movies.id and user_id = '${userId}'), false) fav`)
+        )
+        .from("movies")
+        .innerJoin("actors_movies", "movies.id", "actors_movies.movie_id")
+        .innerJoin("actors", "actors_movies.actor_id", "actors.id")
+        .innerJoin("users_favorites", "movies.id", "users_favorites.movie_id")
+        .where("users_favorites.user_id", userId)
+        .groupBy("movies.id");
+
+      res.render("movies", { movies: results });
     } catch (error) {
       next(error);
     }

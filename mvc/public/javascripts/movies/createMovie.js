@@ -16,6 +16,10 @@ $(() => {
       country: {
         required: true,
       },
+      poster: {
+        required: true,
+        extension: "png|jpg|jpeg",
+      },
     },
     messages: {
       movieName: {
@@ -28,6 +32,10 @@ $(() => {
       },
       country: {
         required: "Please enter a country",
+      },
+      poster: {
+        required: "Please enter a poster",
+        extension: "Please enter a image file",
       },
     },
     errorElement: "small",
