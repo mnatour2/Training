@@ -57,6 +57,9 @@ router.post(
 
 router.get("/movies", async (/** @type {express.Request} */ req, res, next) => {
   try {
+    const {
+      session: { userId },
+    } = req;
     const results = await req.db
       .select(
         "movies.id",
@@ -64,13 +67,16 @@ router.get("/movies", async (/** @type {express.Request} */ req, res, next) => {
         "year",
         "country",
         "poster",
-        req.db.raw('group_concat(full_name separator ", ") as actors')
+        req.db.raw('group_concat(full_name separator ", ") as actors'),
+        req.db.raw(`coalesce(
+          (select distinct true from users_favorites where movie_id = movies.id and user_id = '${userId}'), false) fav`)
       )
       .from("movies")
       .innerJoin("actors_movies", "movies.id", "actors_movies.movie_id")
       .innerJoin("actors", "actors_movies.actor_id", "actors.id")
       .groupBy("movies.id");
 
+    console.log(results);
     res.render("movies", { movies: results });
   } catch (error) {
     next(error);
@@ -85,11 +91,26 @@ router.post(
         session: { userId },
         params: { id },
       } = req;
-      await req.db("users_favorites").insert({
-        user_id: userId,
-        movie_id: id,
+
+      const [isFavorite] = await req
+        .db("users_favorites")
+        .where({ movie_id: id, user_id: userId });
+
+      if (isFavorite) {
+        await req
+          .db("users_favorites")
+          .where({ movie_id: id, user_id: userId })
+          .del();
+      } else {
+        await req.db("users_favorites").insert({
+          user_id: userId,
+          movie_id: id,
+        });
+      }
+
+      res.status(200).json({
+        isFavorite: !isFavorite,
       });
-      res.sendStatus(200);
     } catch (error) {
       next(error);
     }

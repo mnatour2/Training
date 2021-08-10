@@ -59,14 +59,10 @@ svg {
   width: 40px;
 }
 
-#heartFill {
-  display: none;
-}
-
 #iqona button:hover #heartFill {
-  display: block;
+  display: block !important;
 }
 
 #iqona button:hover #heartNotFill {
-  display: none;
+  display: none !important;
 }

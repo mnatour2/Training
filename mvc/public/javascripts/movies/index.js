@@ -4,9 +4,14 @@ function toggleFav(movieId) {
   $.ajax({
     type: "POST",
     url: `/movies/${movieId}/favorite`,
-    success: () => {
-      $(`#heartNotFill[data-movie-id="${movieId}"]`).css("display", "none");
-      $(`#heartFill[data-movie-id="${movieId}"]`).css("display", "block");
+    success: (data) => {
+      if (data.isFavorite) {
+        $(`#heartFill[data-movie-id="${movieId}"]`).removeClass("d-none");
+        $(`#heartNotFill[data-movie-id="${movieId}"]`).addClass("d-none");
+      } else {
+        $(`#heartNotFill[data-movie-id="${movieId}"]`).removeClass("d-none");
+        $(`#heartFill[data-movie-id="${movieId}"]`).addClass("d-none");
+      }
     },
   });
 }

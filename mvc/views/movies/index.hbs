@@ -78,13 +78,22 @@
                     width="100%"
                   />
                   <div id="iqona">
-                    <button class="btn" onclick="toggleFav({{this.id}})">
+                    <button
+                      class="btn"
+                      onclick="toggleFav({{this.id}})"
+                      id="favBtn"
+                    >
                       <svg
                         aria-hidden="true"
                         focusable="false"
                         data-prefix="far"
                         data-icon="heart"
-                        class="svg-inline--fa fa-heart fa-w-16"
+                          {{#if this.fav}}
+                            class="svg-inline--fa fa-heart fa-w-16 d-none"
+                          {{else}}
+                          class="svg-inline--fa fa-heart fa-w-16"
+                          {{/if}}
+                        
                         id="heartNotFill"
                         role="img"
                         xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +111,12 @@
                         focusable="false"
                         data-prefix="fas"
                         data-icon="heart"
-                        class="svg-inline--fa fa-heart fa-w-16"
+                          {{#if this.fav}}
+                            class="svg-inline--fa fa-heart fa-w-16"
+                              {{else}}
+                              class="svg-inline--fa fa-heart fa-w-16 d-none"
+                          {{/if}}
+                        
                         id="heartFill"
                         role="img"
                         xmlns="http://www.w3.org/2000/svg"

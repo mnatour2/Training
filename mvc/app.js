@@ -28,7 +28,7 @@ app.use(
     secret: "yeeee@yeeeeeeet",
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: false, maxAge: 1000000 },
+    cookie: { secure: false },
   })
 );
 
