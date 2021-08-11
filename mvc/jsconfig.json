@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2020",
+    "watch": true,
+    "checkJs": true
+  },
+  "exclude": ["node_modules", "**/node_modules/*", "debug", "public"],
+  "typeAcquisition": {
+    "include": ["express", "express-session", "http-errors", "knex"]
+  }
+}

@@ -1,0 +1,192 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link href="/static/stylesheets/style.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Users</title>
+  </head>
+
+  <body class="text-center position-relative">
+    {{! topnav }}
+    <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand active" href="/home">Company</a>
+        <div class="collapse navbar-collapse justify-content-end">
+
+          <ul class="navbar-nav me-2 mb-0 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="/users">Users</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Movies
+              </a>
+              <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/movies/create">Add a movie</a></li>
+                <li><a class="dropdown-item" href="/movies">View movies</a></li>
+                <li><a class="dropdown-item" href="/movies/favorites">Favorites
+                    movies</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Actors
+              </a>
+              <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/actors/create">Add an actor</a></li>
+                <li><a class="dropdown-item" href="/actors">View actors</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout" tabindex="-1">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {{! table }}
+    <div class="table-responsive w-100 position-absolute top-0 p-3">
+      <table class="table table-hover h-100 w-100 caption-top">
+        <caption class="text-center"><b>Table of users</b></caption>
+        <thead class="border-dark">
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Mobile number</th>
+            <th>Profile picture</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each users}}
+            <tr data-user-id="{{this.id}}">
+              <td>{{this.id}}</td>
+              <td data-column="username">{{this.username}}</td>
+              <td data-column="email">{{this.email}}</td>
+              <td data-column="mobile">{{this.mobile}}</td>
+              <td data-column="picture"><img
+                  class="rounded float-start"
+                  style="height: 70px; width: 50px;"
+                  src="{{this.picture}}"
+                /></td>
+              <td>
+                <button
+                  class="btn btn-outline-warning btn-sm me-2 btn-edit"
+                  title="Edit"
+                  onclick="showModal({{this.id}},true)"
+                >
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="user-edit"
+                    class="svg-inline--fa fa-user-edit fa-w-20"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h274.9c-2.4-6.8-3.4-14-2.6-21.3l6.8-60.9 1.2-11.1 7.9-7.9 77.3-77.3c-24.5-27.7-60-45.5-99.9-45.5zm45.3 145.3l-6.8 61c-1.1 10.2 7.5 18.8 17.6 17.6l60.9-6.8 137.9-137.9-71.7-71.7-137.9 137.8zM633 268.9L595.1 231c-9.3-9.3-24.5-9.3-33.8 0l-37.8 37.8-4.1 4.1 71.8 71.7 41.8-41.8c9.3-9.4 9.3-24.5 0-33.9z"
+                    >
+                    </path>
+                  </svg>
+                </button>
+                <button
+                  class="btn btn-outline-danger btn-sm btn-delete"
+                  title="Delete"
+                  onclick="showModal({{this.id}},false)"
+                >
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="user-minus"
+                    class="svg-inline--fa fa-user-minus fa-w-20"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M624 208H432c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h192c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
+                    >
+                    </path>
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    {{! modal }}
+    <div
+      class="modal fade"
+      id="yee"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">{{! insert title }}</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            {{! insert body }}
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >Close</button>
+            <button
+              type="button"
+              id="modalBtn"
+              class="btn"
+            >{{! insert button value }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/static/javascripts/table.js"></script>
+  </body>
+
+</html>
