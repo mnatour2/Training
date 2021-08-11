@@ -96,17 +96,19 @@ function showModal(id, type) {
     sendRequest("GET", `/users/${id}`, null, (user) => {
       $("#modalLabel").text("Edit");
       $(".modal-body").html(editForm(id, user));
-      $("#modalBtn").addClass("btn-success");
-      $("#modalBtn").text("Submit");
-      $("#modalBtn").attr("onclick", `editContent(${id})`);
+      $("#modalBtn")
+        .addClass("btn-success")
+        .text("Submit")
+        .on("click", () => editContent(id));
     });
   } else {
     sendRequest("GET", `/users/${id}`, null, (user) => {
       $("#modalLabel").text("Delete");
       $(".modal-body").html(deleteForm(id, user));
-      $("#modalBtn").addClass("btn-danger");
-      $("#modalBtn").text("Delete");
-      $("#modalBtn").attr("onclick", `deleteContent(${id})`);
+      $("#modalBtn")
+        .addClass("btn-danger")
+        .text("Delete")
+        .on("click", () => deleteContent(id));
     });
   }
   myModal.show();

@@ -5,6 +5,8 @@ $(() => {
     rules: {
       fullName: {
         required: true,
+        minlength: 5,
+        maxlength: 100,
       },
       dateOfBirth: {
         required: true,
@@ -17,6 +19,8 @@ $(() => {
     messages: {
       fullName: {
         required: "Please enter a full name",
+        minlength: "Full name must be at least 5 characters",
+        maxlength: "Full name must be at most 100 characters",
       },
       dateOfBirth: {
         required: "Please enter a date of birth",
