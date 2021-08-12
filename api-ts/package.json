@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "build": "./node_modules/.bin/ts-node build.ts",
+    "prod": "node -r module-alias/register ./dist --env=production",
     "lint": "eslint . --ext .ts",
-    "start": "node -r module-alias/register ./dist --env=production",
+    "start": "ts-node src/index.ts",
     "start:dev": "nodemon",
     "test": "nodemon --config ./spec/nodemon.json",
     "test:no-reloading": "./node_modules/.bin/ts-node -r tsconfig-paths/register ./spec"
