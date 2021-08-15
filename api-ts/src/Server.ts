@@ -11,9 +11,10 @@ import BaseRouter from "./routes";
 import logger from "@shared/Logger";
 
 import "reflect-metadata";
+import { EntityNotFoundError } from "typeorm";
 
 const app = express();
-const { BAD_REQUEST } = StatusCodes;
+const { BAD_REQUEST, NOT_FOUND } = StatusCodes;
 
 /************************************************************************************
  *                              Set basic express settings
@@ -40,9 +41,14 @@ app.use("/api", BaseRouter);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   logger.err(err, true);
-  return res.status(BAD_REQUEST).json({
-    error: err.message,
-  });
+
+  if (err instanceof EntityNotFoundError) {
+    return res.status(NOT_FOUND).json({ error: "Not found" });
+  } else {
+    return res.status(BAD_REQUEST).json({
+      error: err.message,
+    });
+  }
 });
 
 /************************************************************************************

@@ -1,17 +1,17 @@
 import { Router } from "express";
-import { User } from "@entities/User";
+import { Movie } from "@entities/Movie";
 import { getRepository } from "typeorm";
 import { upload } from "../image-upload";
 import { StatusCodes } from "http-status-codes";
 
-const userRepository = getRepository(User);
+const movieRepository = getRepository(Movie);
 
 export const router = Router();
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 router.get("/", async (_, res, next) => {
   try {
-    res.json(await userRepository.find());
+    res.json(await movieRepository.find());
   } catch (error) {
     next(error);
   }
@@ -20,41 +20,41 @@ router.get("/", async (_, res, next) => {
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 router.get("/:id", async (req, res, next) => {
   try {
-    res.json(await userRepository.findOneOrFail(req.params.id));
+    res.json(await movieRepository.findOneOrFail(req.params.id));
   } catch (error) {
     next(error);
   }
 });
 
-router.post("/", upload.single("picture"), async (req, res, next) => {
+router.post("/", upload.single("poster"), async (req, res, next) => {
   try {
-    const { body, file: picture } = req;
-    const user = userRepository.create({
+    const { body, file: poster } = req;
+    const movie = movieRepository.create({
       ...body,
-      profile_picture: picture?.path,
+      poster: poster?.path,
     });
 
-    res.json(await userRepository.save(user));
+    res.json(await movieRepository.save(movie));
   } catch (error) {
     next(error);
   }
 });
 
-router.put("/:id", upload.single("picture"), async (req, res, next) => {
+router.put("/:id", upload.single("poster"), async (req, res, next) => {
   try {
     const {
       body,
-      file: picture,
+      file: poster,
       params: { id },
     } = req;
-    await userRepository.findOneOrFail(id);
+    await movieRepository.findOneOrFail(id);
 
-    await userRepository.update(id, {
+    await movieRepository.update(id, {
       ...body,
-      profile_picture: picture?.path,
+      profile_picture: poster?.path,
     });
 
-    res.json(await userRepository.findOne(id));
+    res.json(await movieRepository.findOne(id));
   } catch (error) {
     next(error);
   }
@@ -67,9 +67,9 @@ router.delete("/:id", async (req, res, next) => {
       params: { id },
     } = req;
 
-    await userRepository.findOneOrFail(id);
+    await movieRepository.findOneOrFail(id);
 
-    userRepository.delete(id);
+    movieRepository.delete(id);
 
     res.sendStatus(StatusCodes.NO_CONTENT);
   } catch (error) {

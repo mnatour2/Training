@@ -1,14 +1,13 @@
 import { Router } from "express";
-// import { getAllUsers, addOneUser, updateOneUser, deleteOneUser } from './Users';
-
-// User-route
-const userRouter = Router();
-// userRouter.get('/all', getAllUsers);
-// userRouter.post('/add', addOneUser);
-// userRouter.put('/update', updateOneUser);
-// userRouter.delete('/delete/:id', deleteOneUser);
+import { router as userRouter } from "./Users";
+import { router as movieRouter } from "./Movies";
+import { router as actorRouter } from "./Actors";
+import { router as authRouter } from "./Auth";
 
 // Export the base-router
 const baseRouter = Router();
 baseRouter.use("/users", userRouter);
+baseRouter.use("/movies", movieRouter);
+baseRouter.use("/actors", actorRouter);
+baseRouter.use("/auth", authRouter);
 export default baseRouter;

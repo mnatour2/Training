@@ -4,8 +4,13 @@ import {
   Column,
   ManyToMany,
   JoinTable,
+  BeforeInsert,
+  BeforeUpdate,
 } from "typeorm";
 import { Movie } from "./Movie";
+import bcrypt from "bcrypt";
+
+const SALT_ROUNDS = 10;
 
 @Entity()
 export class User {
@@ -15,7 +20,7 @@ export class User {
   @Column()
   username!: string;
 
-  @Column()
+  @Column({ select: false })
   password!: string;
 
   @Column()
@@ -34,4 +39,12 @@ export class User {
     name: "users_favorites",
   })
   movies!: Movie[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword() {
+    if (this.password) {
+      this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
+    }
+  }
 }
