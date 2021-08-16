@@ -49,10 +49,16 @@ router.put("/:id", upload.single("picture"), async (req, res, next) => {
     } = req;
     await userRepository.findOneOrFail(id);
 
-    await userRepository.update(id, {
-      ...body,
-      profile_picture: picture?.path,
-    });
+    if (picture) {
+      await userRepository.update(id, {
+        ...body,
+        profile_picture: picture?.path,
+      });
+    } else {
+      await userRepository.update(id, {
+        ...body,
+      });
+    }
 
     res.json(await userRepository.findOne(id));
   } catch (error) {

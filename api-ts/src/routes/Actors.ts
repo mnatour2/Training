@@ -26,7 +26,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", upload.single("poster"), async (req, res, next) => {
+router.post("/", upload.single("image"), async (req, res, next) => {
   try {
     const { body, file: image } = req;
     const actor = actorRepository.create({
@@ -49,10 +49,16 @@ router.put("/:id", upload.single("image"), async (req, res, next) => {
     } = req;
     await actorRepository.findOneOrFail(id);
 
-    await actorRepository.update(id, {
-      ...body,
-      profile_picture: image?.path,
-    });
+    if (image) {
+      await actorRepository.update(id, {
+        ...body,
+        image: image?.path,
+      });
+    } else {
+      await actorRepository.update(id, {
+        ...body,
+      });
+    }
 
     res.json(await actorRepository.findOne(id));
   } catch (error) {

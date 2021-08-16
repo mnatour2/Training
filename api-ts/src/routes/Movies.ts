@@ -49,10 +49,16 @@ router.put("/:id", upload.single("poster"), async (req, res, next) => {
     } = req;
     await movieRepository.findOneOrFail(id);
 
-    await movieRepository.update(id, {
-      ...body,
-      profile_picture: poster?.path,
-    });
+    if (poster) {
+      await movieRepository.update(id, {
+        ...body,
+        poster: poster?.path,
+      });
+    } else {
+      await movieRepository.update(id, {
+        ...body,
+      });
+    }
 
     res.json(await movieRepository.findOne(id));
   } catch (error) {
