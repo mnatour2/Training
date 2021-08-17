@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { Actor } from "@entities/Actor";
 import { getRepository } from "typeorm";
-import { upload } from "../image-upload";
+import { uploadSingleImage } from "../image-upload";
 import { StatusCodes } from "http-status-codes";
+import { validateWithRepository } from "src/middlewares/validator";
 
 const actorRepository = getRepository(Actor);
 
@@ -26,45 +27,56 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", upload.single("image"), async (req, res, next) => {
-  try {
-    const { body, file: image } = req;
-    const actor = actorRepository.create({
-      ...body,
-      image: image?.path,
-    });
-
-    res.json(await actorRepository.save(actor));
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.put("/:id", upload.single("image"), async (req, res, next) => {
-  try {
-    const {
-      body,
-      file: image,
-      params: { id },
-    } = req;
-    await actorRepository.findOneOrFail(id);
-
-    if (image) {
-      await actorRepository.update(id, {
+router.post(
+  "/",
+  ...uploadSingleImage("image"),
+  validateWithRepository(actorRepository),
+  async (req, res, next) => {
+    try {
+      const { body, file: image } = req;
+      const actor = actorRepository.create({
         ...body,
         image: image?.path,
       });
-    } else {
-      await actorRepository.update(id, {
-        ...body,
-      });
-    }
 
-    res.json(await actorRepository.findOne(id));
-  } catch (error) {
-    next(error);
+      res.json(await actorRepository.save(actor));
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
+
+router.put(
+  "/:id",
+  ...uploadSingleImage("image"),
+  validateWithRepository(actorRepository),
+
+  async (req, res, next) => {
+    try {
+      const {
+        body,
+        file: image,
+        params: { id },
+      } = req;
+      await actorRepository.findOneOrFail(id);
+
+      if (image) {
+        await actorRepository.update(id, {
+          ...body,
+          image: image?.path,
+        });
+      } else {
+        await actorRepository.update(id, {
+          ...body,
+        });
+      }
+
+      res.json(await actorRepository.findOne(id));
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 router.delete("/:id", async (req, res, next) => {

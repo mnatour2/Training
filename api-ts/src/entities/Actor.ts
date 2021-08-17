@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm";
 import { Movie } from "./Movie";
-import { validate, validateOrReject, Length, IsDate } from "class-validator";
+import { Length, IsDate, IsNotEmpty } from "class-validator";
 
 @Entity()
 export class Actor {
@@ -16,6 +16,7 @@ export class Actor {
   date_of_birth!: Date;
 
   @Column()
+  @IsNotEmpty()
   image!: string;
 
   @ManyToMany((type) => Movie, (movie) => movie.actors)

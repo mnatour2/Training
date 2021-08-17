@@ -9,18 +9,7 @@ import {
 } from "typeorm";
 import { Movie } from "./Movie";
 import bcrypt from "bcrypt";
-import {
-  validate,
-  validateOrReject,
-  Contains,
-  IsInt,
-  Length,
-  IsEmail,
-  IsFQDN,
-  IsDate,
-  Min,
-  Max,
-} from "class-validator";
+import { Length, IsEmail, IsNotEmpty } from "class-validator";
 
 const SALT_ROUNDS = 10;
 
@@ -34,7 +23,7 @@ export class User {
   username!: string;
 
   @Column({ select: false })
-  @Min(8)
+  @Length(8, 32)
   password!: string;
 
   @Column()
@@ -46,6 +35,7 @@ export class User {
   mobile!: string;
 
   @Column()
+  @IsNotEmpty()
   profile_picture!: string;
 
   @ManyToMany((type) => Movie)

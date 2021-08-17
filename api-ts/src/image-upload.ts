@@ -1,6 +1,7 @@
 import multer from "multer";
+import { RequestHandler } from "express";
 
-export const upload = multer({
+const upload = multer({
   dest: "uploads/",
   fileFilter: (req, file, cb) => {
     if (
@@ -14,3 +15,15 @@ export const upload = multer({
     return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
   },
 });
+
+const injectFileToRequestBody: RequestHandler = (req, res, next) => {
+  if (req.file) {
+    req.body[req.file.fieldname] = req.file?.path;
+  }
+  next();
+};
+
+export const uploadSingleImage = (field: string) => [
+  upload.single(field),
+  injectFileToRequestBody,
+];

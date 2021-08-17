@@ -6,8 +6,7 @@ import {
   JoinTable,
 } from "typeorm";
 import { Actor } from "./Actor";
-import { User } from "./User";
-import { validate, validateOrReject, Length, IsFQDN } from "class-validator";
+import { IsNotEmpty, Length } from "class-validator";
 
 @Entity()
 export class Movie {
@@ -15,17 +14,19 @@ export class Movie {
   id!: number;
 
   @Column()
-  @Length(6, 30)
+  @Length(2, 30)
   name!: string;
 
   @Column()
+  @Length(4, 4)
   year!: string;
 
   @Column()
-  @IsFQDN()
+  @IsNotEmpty()
   country!: string;
 
   @Column()
+  @IsNotEmpty()
   poster!: string;
 
   @ManyToMany((type) => Actor, (actor) => actor.movies)
