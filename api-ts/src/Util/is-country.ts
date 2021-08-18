@@ -1,4 +1,4 @@
-import { registerDecorator } from "class-validator";
+import { registerDecorator, ValidationArguments } from "class-validator";
 import fs from "fs/promises";
 
 export function IsCountry() {
@@ -8,10 +8,11 @@ export function IsCountry() {
       name: "isCountry",
       target: object.constructor,
       propertyName: propertyName,
+
       validator: {
         validate(value: any) {
           if (typeof value === "string" && value.length) {
-            return fs.readFile("/src/Util/countries.json").then((buff) => {
+            return fs.readFile("src/Util/countries.json").then((buff) => {
               const countries: { name: string; code: string }[] = JSON.parse(
                 buff.toString()
               );
@@ -20,6 +21,9 @@ export function IsCountry() {
           } else {
             return false;
           }
+        },
+        defaultMessage() {
+          return "No such country";
         },
       },
     });

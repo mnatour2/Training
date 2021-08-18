@@ -33,9 +33,14 @@ router.post(
   validateWithRepository(movieRepository),
   async (req, res, next) => {
     try {
+      let countryReady: string = req.body.country;
+      countryReady =
+        countryReady.charAt(0).toUpperCase() +
+        countryReady.slice(1).toLowerCase();
       const { body, file: poster } = req;
       const movie = movieRepository.create({
         ...body,
+        country: countryReady,
         poster: poster?.path,
       });
 
