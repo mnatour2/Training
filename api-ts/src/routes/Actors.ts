@@ -33,11 +33,7 @@ router.post(
   validateWithRepository(actorRepository),
   async (req, res, next) => {
     try {
-      const { body, file: image } = req;
-      const actor = actorRepository.create({
-        ...body,
-        image: image?.path,
-      });
+      const actor = actorRepository.create(req.body);
 
       res.json(await actorRepository.save(actor));
     } catch (error) {
@@ -55,22 +51,10 @@ router.put(
     try {
       const {
         body,
-        file: image,
         params: { id },
       } = req;
       await actorRepository.findOneOrFail(id);
-
-      if (image) {
-        await actorRepository.update(id, {
-          ...body,
-          image: image?.path,
-        });
-      } else {
-        await actorRepository.update(id, {
-          ...body,
-        });
-      }
-
+      await actorRepository.update(id, { ...body });
       res.json(await actorRepository.findOne(id));
     } catch (error) {
       next(error);

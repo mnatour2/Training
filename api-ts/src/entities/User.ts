@@ -18,7 +18,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ unique: true })
   @Length(6, 30)
   username!: string;
 
@@ -26,7 +26,7 @@ export class User {
   @Length(8, 32)
   password!: string;
 
-  @Column()
+  @Column({ unique: true })
   @IsEmail()
   email!: string;
 
@@ -46,7 +46,7 @@ export class User {
 
   @BeforeInsert()
   @BeforeUpdate()
-  async hashPassword() {
+  private async hashPassword() {
     if (this.password) {
       this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
     }

@@ -4,13 +4,14 @@ import { getRepository } from "typeorm";
 import { uploadSingleImage } from "../image-upload";
 import { StatusCodes } from "http-status-codes";
 import { validateWithRepository } from "src/middlewares/validator";
+import { auth } from "src/middlewares/auth";
 
 const userRepository = getRepository(User);
 
 export const router = Router();
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-router.get("/", async (_, res, next) => {
+router.get("/", auth(), async (_, res, next) => {
   try {
     res.json(await userRepository.find());
   } catch (error) {
@@ -19,7 +20,7 @@ router.get("/", async (_, res, next) => {
 });
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", auth(), async (req, res, next) => {
   try {
     res.json(await userRepository.findOneOrFail(req.params.id));
   } catch (error) {
@@ -29,15 +30,12 @@ router.get("/:id", async (req, res, next) => {
 
 router.post(
   "/",
-  ...uploadSingleImage("picture"),
+  auth(),
+  ...uploadSingleImage("profile_picture"),
   validateWithRepository(userRepository),
   async (req, res, next) => {
     try {
-      const { body, file: picture } = req;
-      const user = userRepository.create({
-        ...body,
-        profile_picture: picture?.path,
-      });
+      const user = userRepository.create(req.body);
 
       res.json(await userRepository.save(user));
     } catch (error) {
@@ -48,27 +46,17 @@ router.post(
 
 router.put(
   "/:id",
-  ...uploadSingleImage("picture"),
+  auth(),
+  ...uploadSingleImage("profile_picture"),
   validateWithRepository(userRepository),
   async (req, res, next) => {
     try {
       const {
         body,
-        file: picture,
         params: { id },
       } = req;
       await userRepository.findOneOrFail(id);
-
-      if (picture) {
-        await userRepository.update(id, {
-          ...body,
-          profile_picture: picture?.path,
-        });
-      } else {
-        await userRepository.update(id, {
-          ...body,
-        });
-      }
+      await userRepository.update(id, { ...body });
 
       res.json(await userRepository.findOne(id));
     } catch (error) {
@@ -78,7 +66,7 @@ router.put(
 );
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", auth(), async (req, res, next) => {
   try {
     const {
       params: { id },

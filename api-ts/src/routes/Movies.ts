@@ -37,11 +37,10 @@ router.post(
       countryReady =
         countryReady.charAt(0).toUpperCase() +
         countryReady.slice(1).toLowerCase();
-      const { body, file: poster } = req;
+      const { body } = req;
       const movie = movieRepository.create({
         ...body,
         country: countryReady,
-        poster: poster?.path,
       });
 
       res.json(await movieRepository.save(movie));
@@ -59,21 +58,10 @@ router.put(
     try {
       const {
         body,
-        file: poster,
         params: { id },
       } = req;
       await movieRepository.findOneOrFail(id);
-
-      if (poster) {
-        await movieRepository.update(id, {
-          ...body,
-          poster: poster?.path,
-        });
-      } else {
-        await movieRepository.update(id, {
-          ...body,
-        });
-      }
+      await movieRepository.update(id, { ...body });
 
       res.json(await movieRepository.findOne(id));
     } catch (error) {
