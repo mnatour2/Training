@@ -3,7 +3,7 @@ import { Movie } from "@entities/Movie";
 import { getRepository } from "typeorm";
 import { uploadSingleImage } from "../image-upload";
 import { StatusCodes } from "http-status-codes";
-import { validateWithRepository } from "src/middlewares/validator";
+import { validateWithRepository } from "../middlewares/validator";
 
 const movieRepository = getRepository(Movie);
 

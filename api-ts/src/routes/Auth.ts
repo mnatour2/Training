@@ -1,12 +1,12 @@
 import { User } from "@entities/User";
 import { Router } from "express";
-import { uploadSingleImage } from "src/image-upload";
-import { validateWithRepository } from "src/middlewares/validator";
+import { uploadSingleImage } from "../image-upload";
+import { validateWithRepository } from "../middlewares/validator";
 import { getRepository } from "typeorm";
 import bcrypt from "bcrypt";
 import { StatusCodes } from "http-status-codes";
 import { sign } from "jsonwebtoken";
-import { auth } from "src/middlewares/auth";
+import { auth } from "../middlewares/auth";
 
 const repository = getRepository(User);
 

@@ -3,8 +3,8 @@ import { User } from "@entities/User";
 import { getRepository } from "typeorm";
 import { uploadSingleImage } from "../image-upload";
 import { StatusCodes } from "http-status-codes";
-import { validateWithRepository } from "src/middlewares/validator";
-import { auth } from "src/middlewares/auth";
+import { validateWithRepository } from "../middlewares/validator";
+import { auth } from "../middlewares/auth";
 
 const userRepository = getRepository(User);
 

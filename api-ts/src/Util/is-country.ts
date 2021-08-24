@@ -12,7 +12,7 @@ export function IsCountry() {
       validator: {
         validate(value: any) {
           if (typeof value === "string" && value.length) {
-            return fs.readFile("src/Util/countries.json").then((buff) => {
+            return fs.readFile("./countries.json").then((buff) => {
               const countries: { name: string; code: string }[] = JSON.parse(
                 buff.toString()
               );

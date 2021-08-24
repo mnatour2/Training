@@ -7,7 +7,7 @@ import {
 } from "typeorm";
 import { Actor } from "./Actor";
 import { IsNotEmpty, Length } from "class-validator";
-import { IsCountry } from "src/Util/is-country";
+import { IsCountry } from "../Util/is-country";
 
 @Entity()
 export class Movie {

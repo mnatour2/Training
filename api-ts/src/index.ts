@@ -10,7 +10,7 @@ createConnection({
   username: "root",
   password: "admin",
   database: "api-ts",
-  entities: [__dirname + "/entities/*.ts"],
+  entities: [__dirname + "/entities/*.{ts,js}"],
   synchronize: true,
   logging: false,
 })
