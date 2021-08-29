@@ -1,11 +1,19 @@
 import React from "react";
-import { Container, Form, Row, FloatingLabel } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Row,
+  FloatingLabel,
+  Button,
+  Col,
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   return (
-    <Container className="w-25">
+    <Container fluid className="text-center">
       <Row>
-        <main className="form-signin">
+        <Col xs={{ offset: 0, span: 12 }} md={{ offset: 3, span: 6 }}>
           <Form
             method="POST"
             id="register-form"
@@ -53,34 +61,16 @@ export default function Register() {
               <Form.Control type="text" placeholder="Mobile number" />
             </FloatingLabel>
 
-            <div className="input-group col-md-12 text-start">
-              <label for="registerPhoto" className="form-label col-md-12">
-                Profile picture
-              </label>
-              <input
-                name="picture"
-                id="registerPhoto"
-                type="file"
-                className="form-control"
-                aria-label="file example"
-                aria-describedby="inputGroup-sizing-default"
-                required
-              />
-            </div>
-
-            <div className="col-12">
-              <button
-                className="w-100 btn btn-lg btn-primary my-2"
-                type="submit"
-              >
-                Create
-              </button>
-            </div>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Profile Picture</Form.Label>
+              <Form.Control type="file" name="profilePic" />
+            </Form.Group>
+            <Button size="lg" as="input" type="submit" value="Register" />
             <div className=" pt-0 mt-0">
-              Already have an account ?<a href="/login">Login</a>
+              Already have an account ? <Link to="/login">Login</Link>
             </div>
           </Form>
-        </main>
+        </Col>
       </Row>
     </Container>
   );

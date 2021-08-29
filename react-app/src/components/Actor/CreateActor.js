@@ -1,18 +1,25 @@
 import React from "react";
-import { Container, Form, Row, FloatingLabel } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Row,
+  FloatingLabel,
+  Col,
+  Button,
+} from "react-bootstrap";
 
 export default function CreateActor() {
   return (
-    <Container className="w-25">
+    <Container fluid>
       <Row>
-        <main className="form-signin">
+        <Col xs={{ offset: 0, span: 12 }} md={{ offset: 3, span: 6 }}>
           <Form
             method="POST"
             id="register-form"
             className="row g-3 needs-validation"
             novalidate
           >
-            <h1 className="h1 fw-normal">Create a new Actor</h1>
+            <h1 className="h1 fw-normal text-center">Create a new Actor</h1>
             <FloatingLabel
               controlId="floatingInput"
               label="Full Name"
@@ -29,31 +36,13 @@ export default function CreateActor() {
               <Form.Control type="date" placeholder="Date of birth" />
             </FloatingLabel>
 
-            <div className="input-group col-md-12 text-start">
-              <label for="image" className="form-label col-md-12">
-                Image
-              </label>
-              <input
-                name="image"
-                id="image"
-                type="file"
-                className="form-control"
-                aria-label="file example"
-                aria-describedby="inputGroup-sizing-default"
-                required
-              />
-            </div>
-
-            <div className="col-12">
-              <button
-                className="w-100 btn btn-lg btn-primary my-3"
-                type="submit"
-              >
-                Create
-              </button>
-            </div>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Image</Form.Label>
+              <Form.Control type="file" name="image" />
+            </Form.Group>
+            <Button size="lg" as="input" type="submit" value="Submit" />
           </Form>
-        </main>
+        </Col>
       </Row>
     </Container>
   );
