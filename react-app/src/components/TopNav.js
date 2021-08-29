@@ -5,23 +5,27 @@ export default function TopNav() {
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
       <Container>
-        <Navbar.Brand href="#">React-App</Navbar.Brand>
+        <Navbar.Brand href="/">React-App</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
           <Nav>
             <NavDropdown title="Actors" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/addActor">
+              <NavDropdown.Item href="/createActor">
                 Create a new actor
               </NavDropdown.Item>
               <NavDropdown.Item href="/actors"> View Actors</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Movies" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#">Create a new movie</NavDropdown.Item>
-              <NavDropdown.Item href="#">View movies</NavDropdown.Item>
+              <NavDropdown.Item href="/createMovie">
+                Create a new movie
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/movies">View movies</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Users" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#">Create a new user</NavDropdown.Item>
-              <NavDropdown.Item href="#">View users</NavDropdown.Item>
+              <NavDropdown.Item href="/createUser">
+                Create a new user
+              </NavDropdown.Item>
+              <NavDropdown.Item href="Users">View users</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#">Logout</Nav.Link>
           </Nav>

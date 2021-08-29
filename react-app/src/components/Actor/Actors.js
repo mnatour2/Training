@@ -1,10 +1,10 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 
-export default function ActorTable(props) {
+export default function Actors(props) {
   return (
-    <div>
-      <Table striped bordered hover variant="dark">
+    <div className="p-4">
+      <Table striped bordered hover variant="light">
         <thead>
           <tr>
             <th>ID</th>
