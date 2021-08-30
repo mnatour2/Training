@@ -38,7 +38,6 @@ router.post("/login", auth("guest"), async (req, res, next) => {
       },
       select: ["id", "password"],
     });
-
     if (user && (await bcrypt.compare(body.password, user.password))) {
       const token = sign({ userId: user.id }, "secret", { expiresIn: "1h" });
 
