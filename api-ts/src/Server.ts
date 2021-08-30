@@ -3,6 +3,8 @@ import morgan from "morgan";
 // import path from "path";
 import helmet from "helmet";
 
+import cors from "cors";
+
 import express, { NextFunction, Request, Response } from "express";
 import StatusCodes from "http-status-codes";
 import "express-async-errors";
@@ -14,6 +16,7 @@ import "reflect-metadata";
 import { EntityNotFoundError } from "typeorm";
 
 const app = express();
+app.use(cors({ origin: "*" }));
 const { BAD_REQUEST, NOT_FOUND } = StatusCodes;
 
 /************************************************************************************
