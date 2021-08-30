@@ -49,7 +49,7 @@ function App() {
       </div>
 
       <Switch>
-        <Route path="/" exact="true">
+        <Route path="/" exact>
           <Home />
         </Route>
         <Route path="/login">

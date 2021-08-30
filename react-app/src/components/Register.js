@@ -14,12 +14,7 @@ export default function Register() {
     <Container fluid className="text-center">
       <Row>
         <Col xs={{ offset: 0, span: 12 }} md={{ offset: 3, span: 6 }}>
-          <Form
-            method="POST"
-            id="register-form"
-            className="row g-3 needs-validation"
-            novalidate
-          >
+          <Form method="POST" id="register-form" className="row g-3">
             <h1 className="h1 fw-normal">Register</h1>
             <FloatingLabel
               controlId="floatingInput"

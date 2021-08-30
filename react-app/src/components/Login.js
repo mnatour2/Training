@@ -14,12 +14,7 @@ export default function Login() {
     <Container fluid className="pt-5">
       <Row>
         <Col xs={{ offset: 0, span: 12 }} md={{ offset: 3, span: 6 }}>
-          <Form
-            method="POST"
-            id="login-form"
-            className="row g-3 needs-validation"
-            novalidate
-          >
+          <Form method="POST" id="login-form" className="row g-3">
             <h1 className="h1 mb-3 fw-normal text-center">Login</h1>
             <FloatingLabel
               controlId="floatingInput"
